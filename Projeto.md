@@ -34,15 +34,32 @@ O público-alvo deste sistema é composto principalmente por administradores de 
 
 **d) Justifique as escolhas do grupo descrevendo de que forma os elementos implementados irão se comunicar com o objetivo do projeto e com seu público-alvo.**
 
+ **1. Coração com braços envolventes**
+ Símbolo de solidariedade e acolhimento, o coração representa o propósito social do projeto: promover o bem por meio de doações.
+ Os braços que abraçam a sigla remetem à proteção, cuidado e compromisso humano, reforçando a missão de apoio mútuo entre organizações e comunidades.
+ 
+ **2. Cores vibrantes e significativas**
+ Cada cor foi escolhida para transmitir valores importantes ao público-alvo:
+ Vermelho: Comprometimento e urgência, simbolizando o impacto das ações sociais.
+ Amarelo: Clareza e energia, sugerindo um sistema prático e motivador.
+ Azul: Segurança, responsabilidade e profissionalismo, qualidades esperadas por administradores ao confiar em uma ferramenta de gestão.
+ Roxo: Inovação e empatia, indicando um sistema moderno e sensível às necessidades sociais.
+ Essas cores ajudam a segmentar visualmente a sigla, facilitando a memorização e identificação da marca.
+ 
+ **3. Tipografia simples e em caixa alta**
+ A escolha por letras maiúsculas e sem serifa oferece:
+ Leitura fácil e rápida, essencial para profissionais em ambientes organizacionais.
+ Um ar de autoridade e confiança, conectando-se com administradores que buscam eficiência.
+ 
+ **4. Estilo limpo e direto**
+ O visual minimalista evita distrações, o que reflete o próprio sistema: funcional, objetivo e organizado.
+ Isso é especialmente importante para o público-alvo, que valoriza clareza e agilidade no uso de ferramentas digitais.
+ 
 ***
 
 ## PARTE II - DESENVOLVIMENTO DE UMA IDENTIDADE VISUAL
 
-### Público-Alvo:
-
-### Identidade visual:
 
 
-### Objetivos:
 
 
