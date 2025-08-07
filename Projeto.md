@@ -9,6 +9,7 @@ desenvolver um sistema de gestão de campanhas de doação, voltado para organiz
 O público-alvo deste sistema é composto principalmente por administradores de organizações, que precisam de uma ferramenta prática e eficiente para gerenciar suas campanhas de doação.
 
 **c) Descreva os elementos que irão compor a identidade visual do seu projeto (formas, figuras, cores, tipografia, fotografia, etc)**
+
   **1. Formas e Figuras**
     Coração vermelho com braços envolvendo as letras: Representa o afeto, o cuidado e a solidariedade, transmitindo uma mensagem de acolhimento e empatia. Os braços envolventes reforçam a ideia de proteção, apoio e união.
     Letras “GDCB” inseridas dentro do coração: Utilizadas de forma destacada para reforçar a sigla/nome do projeto. Estão posicionadas de maneira integrada à figura central.
@@ -43,4 +44,5 @@ O público-alvo deste sistema é composto principalmente por administradores de 
 
 
 ### Objetivos:
+
 
