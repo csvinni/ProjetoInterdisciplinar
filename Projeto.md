@@ -1,5 +1,9 @@
 # Planejamento do Projeto   
 
+## Gerenciador de Doações e Campanhas Beneficientes
+
+### Alunos: Caio Vinicios, Lourranny Santana, Maria Clara, Gabrielle Mariz e Samara Fernanda
+
 ## PARTE I
 
 **a) Qual o objetivo do seu projeto?** 
@@ -60,3 +64,4 @@ O público-alvo deste sistema é composto principalmente por administradores de 
 ## PARTE II - DESENVOLVIMENTO DE UMA IDENTIDADE VISUAL
 
 ![Logo do Projeto](/logoprojeto.png)
+
