@@ -59,7 +59,4 @@ O público-alvo deste sistema é composto principalmente por administradores de 
 
 ## PARTE II - DESENVOLVIMENTO DE UMA IDENTIDADE VISUAL
 
-
-
-
-
+![Logo do Projeto](/logoprojeto.png)
