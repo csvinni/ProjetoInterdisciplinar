@@ -1,67 +1,82 @@
-# Planejamento do Projeto   
+# Planejamento do Projeto 
 
 ## Gerenciador de Doações e Campanhas Beneficientes
-
 ### Alunos: Caio Vinicios, Lourranny Santana, Maria Clara, Gabrielle Mariz e Samara Fernanda
 
-## PARTE I
 
-**a) Qual o objetivo do seu projeto?** 
-desenvolver um sistema de gestão de campanhas de doação, voltado para organizações. Este sistema permitirá que administradores gerenciem de forma eficiente todas as operações relacionadas às campanhas de doação, desde o cadastro de informações até o registro de doações.
+## **PARTE I – INTRODUÇÃO DO PROJETO**
 
-**b) Qual o seu público-alvo? Como o grupo caracteriza esse grupo?**
-O público-alvo deste sistema é composto principalmente por administradores de organizações, que precisam de uma ferramenta prática e eficiente para gerenciar suas campanhas de doação.
+O **Gerenciador de Doações e Campanhas Beneficentes (GDCB)** é uma solução digital desenvolvida para otimizar a forma como organizações beneficentes gerenciam suas campanhas de arrecadação. Seu objetivo central é oferecer uma plataforma **funcional, intuitiva e visualmente coerente**, que permita a administradores controlar todo o ciclo de vida de uma campanha — do cadastro inicial até o acompanhamento das doações — de forma clara e confiável.
 
-**c) Descreva os elementos que irão compor a identidade visual do seu projeto (formas, figuras, cores, tipografia, fotografia, etc)**
+### **Público-Alvo e Contexto**
 
-  **1. Formas e Figuras**
-    Coração vermelho com braços envolvendo as letras: Representa o afeto, o cuidado e a solidariedade, transmitindo uma mensagem de acolhimento e empatia. Os braços envolventes reforçam a ideia de proteção, apoio e união.
-    Letras “GDCB” inseridas dentro do coração: Utilizadas de forma destacada para reforçar a sigla/nome do projeto. Estão posicionadas de maneira integrada à figura central.
-    
-  **2. Cores**
-    Cada letra da sigla “GDCB” possui uma cor diferente, o que ajuda na diferenciação e traz um aspecto visual dinâmico:
-    Vermelho (#E63946): Transmite emoção, paixão, energia e compaixão. Presente no coração e na letra "B".
-    Amarelo (#F1C40F): Associado à alegria, otimismo e esperança. Presente na letra "G".
-    Azul (#1F4E79): Simboliza confiança, segurança e responsabilidade. Presente na letra "D".
-    Roxo (#9B59B6): Remete à criatividade, acolhimento e transformação. Presente na letra "C".
-    
-  **3. Tipografia**
-  Fonte sem serifa (estilo geométrico, moderno e legível): O uso de uma tipografia simples e sólida transmite clareza, acessibilidade e modernidade. As letras maiúsculas destacam força e autoridade.
-  
-  **4. Estilo Visual Geral**
-  Minimalista e simbólico: A combinação de um único ícone central com texto reduzido garante fácil memorização e aplicação em diferentes formatos.
-  
-  Equilíbrio visual: A disposição dos elementos é simétrica, com boa distribuição de peso visual entre a imagem e as letras.
-  
-  **5. Fotografia**
-  Não há uso de fotografias na logo, o que mantém o visual limpo e versátil, ideal para diversas mídias (digitais e impressas).
+O público principal é formado por **administradores de organizações sociais**, pessoas que precisam de ferramentas eficientes para coordenar campanhas e monitorar resultados, muitas vezes com tempo e recursos limitados.
+Segundo a **Aula 05, página 13**, compreender profundamente o público é o primeiro passo para criar uma identidade visual que comunique os valores corretos e gere identificação. Por isso, o GDCB foi pensado para transmitir **confiança**, **clareza** e **acolhimento**, características essenciais nesse segmento.
 
-**d) Justifique as escolhas do grupo descrevendo de que forma os elementos implementados irão se comunicar com o objetivo do projeto e com seu público-alvo.**
+### **Integração de UX e UI**
 
- **1. Coração com braços envolventes**
- Símbolo de solidariedade e acolhimento, o coração representa o propósito social do projeto: promover o bem por meio de doações.
- Os braços que abraçam a sigla remetem à proteção, cuidado e compromisso humano, reforçando a missão de apoio mútuo entre organizações e comunidades.
- 
- **2. Cores vibrantes e significativas**
- Cada cor foi escolhida para transmitir valores importantes ao público-alvo:
- Vermelho: Comprometimento e urgência, simbolizando o impacto das ações sociais.
- Amarelo: Clareza e energia, sugerindo um sistema prático e motivador.
- Azul: Segurança, responsabilidade e profissionalismo, qualidades esperadas por administradores ao confiar em uma ferramenta de gestão.
- Roxo: Inovação e empatia, indicando um sistema moderno e sensível às necessidades sociais.
- Essas cores ajudam a segmentar visualmente a sigla, facilitando a memorização e identificação da marca.
- 
- **3. Tipografia simples e em caixa alta**
- A escolha por letras maiúsculas e sem serifa oferece:
- Leitura fácil e rápida, essencial para profissionais em ambientes organizacionais.
- Um ar de autoridade e confiança, conectando-se com administradores que buscam eficiência.
- 
- **4. Estilo limpo e direto**
- O visual minimalista evita distrações, o que reflete o próprio sistema: funcional, objetivo e organizado.
- Isso é especialmente importante para o público-alvo, que valoriza clareza e agilidade no uso de ferramentas digitais.
- 
-***
+A qualidade da experiência do usuário (**UX – User Experience**) e da interface (**UI – User Interface**) é determinante para o sucesso do GDCB.
+
+* **Experiência do Usuário (UX):** Focamos em reduzir o esforço cognitivo do administrador, garantindo navegação intuitiva, hierarquia visual clara e respostas rápidas do sistema. Como reforça a **Aula 05**, a percepção da marca é formada não apenas pelo logotipo, mas pela soma de todas as interações visuais e funcionais.
+
+* **Interface do Usuário (UI):** A camada visual foi planejada para transmitir a personalidade da marca e facilitar o uso. Isso envolve:
+
+  * **Padronização** de cores, tipografia e espaçamentos para manter consistência (**Aula 05, p. 11**).
+  * **Impacto visual controlado**, utilizando cores estratégicas para guiar a atenção (**Aula 05, p. 21**).
+  * **Acessibilidade**, com contraste adequado e tipografia legível, alinhando estética e funcionalidade.
+
+### **Importância da Identidade Visual**
+
+A identidade visual não é apenas um elemento estético, mas um recurso estratégico para:
+
+* Diferenciar o sistema no mercado.
+* Comunicar valores e gerar conexão emocional.
+* Criar confiança na marca, essencial quando se trata da gestão de doações.
+
+Na **Parte II**, apresentaremos cada elemento visual — **cores, tipografia, estilo, fotografia e ilustração** — justificando as escolhas com base na teoria apresentada no material da Aula 05 e nos princípios de UX e UI, conectando as decisões às necessidades e expectativas do público-alvo.
+
+
 
 ## PARTE II - DESENVOLVIMENTO DE UMA IDENTIDADE VISUAL
 
-![Logo do Projeto](/logoprojeto.png)
+### 1. Cores
+A paleta de cores foi escolhida de forma estratégica para transmitir valores e sensações alinhados ao propósito do projeto e às expectativas do público-alvo:
+- **Vermelho (#E63946)** – Transmite paixão, urgência e compaixão, incentivando ação imediata.  
+- **Amarelo (#F1C40F)** – Associa-se à alegria e otimismo, criando proximidade emocional.  
+- **Azul (#1F4E79)** – Passa segurança, confiabilidade e profissionalismo.  
+- **Roxo (#9B59B6)** – Representa criatividade, acolhimento e inovação.
 
+No material da *Aula 05*, **p. 21**, as cores devem ser definidas com base na psicologia das cores, garantindo impacto emocional correto. Na **p. 25**, recomenda-se criar uma paleta limpa e flexível, algo que aplicamos ao definir cores principais e complementares para diferentes contextos de uso. No UX, a cor influencia diretamente a percepção e o engajamento do usuário. No UI, garante contraste e acessibilidade, facilitando a navegação e evitando fadiga visual.
+
+### 2. Tipografia
+Utilizaremos fonte **sem serifa**, geométrica e em **caixa alta**, para assegurar legibilidade e transmitir força visual. Na *Aula 05*, **p. 19**, é indicado limitar a quantidade de famílias tipográficas e priorizar a legibilidade. A caixa alta reforça autoridade e presença da marca. No UX, tipografia clara evita esforço cognitivo na leitura. No UI, a consistência tipográfica mantém padronização em botões, títulos e textos explicativos, facilitando a hierarquia visual.
+
+### 3. Estilo Visual
+O estilo será **minimalista e simbólico**, com um único ícone central (coração com braços) e composição simétrica. Essa abordagem garante clareza, fácil memorização e aplicação em diferentes formatos e plataformas. Na *Aula 05*, **p. 17**, é ressaltado que o logotipo deve integrar-se a um sistema de identidade visual consistente. Na **p. 18**, a tendência de simplificação — "menos é mais" — é destacada como forma de aumentar o impacto visual. No UX, o minimalismo reduz distrações e mantém o foco na tarefa do usuário. No UI, simplifica a aplicação em diferentes resoluções e dispositivos, mantendo identidade coerente. 
+
+### 4. Fotografia e Ilustração
+Não serão usadas fotografias na logo; a marca será representada por uma ilustração vetorial única, garantindo consistência visual. Na *Aula 05*, **p. 27**, é sugerido que ilustrações mantenham uma linguagem uniforme para reforçar a identidade visual. No UX, a ausência de imagens conflitantes mantém clareza na comunicação. No UI, ilustrações vetoriais são escaláveis e adaptáveis, garantindo legibilidade em diferentes tamanhos.
+
+### 5. Relação com o Público-Alvo
+O design visual foi pensado para atender às necessidades e expectativas dos administradores de organizações beneficentes:
+- **Confiança** – Garantida pelas cores azul e roxo e pela tipografia sólida.  
+- **Clareza** – Obtida pelo estilo minimalista e fontes legíveis.  
+- **Empatia** – Transmitida pelo uso de cores quentes e pelo símbolo do coração com braços.
+
+Na *Aula 05*, **p. 13**, destaca-se que conhecer o público é essencial para alinhar a identidade visual à personalidade da marca. No UX, entender o público garante que o design atenda suas expectativas e reduza fricções. No UI, permite criar elementos visuais que ressoam emocionalmente e se mantêm consistentes.
+
+## PARTE III - VALORES E ESBOÇO DO PROJETO
+
+
+O  gerenciador de campanhas e doações beneficentes busca eficiência e praticidade na administração de organizações ou ações solidárias, como ONGs, instituições sem fins lucrativos e campanhas solidárias, ou seja, entende-se que o design do sistema também transmitirá a ideia de aconchego e acolhimento para o usuário. 
+Valores que o sistema representa:
+
+-	**Solidariedade e acolhimento:** reforçado pelo coração com braços, que simboliza afeto e apoio.
+-	**Eficiência:** refletida no visual minimalista e na promessa de um sistema prático para o público-alvo.
+-	**Segurança e confiança:** transmitidas pelo azul na letra "D" e pela tipografia sólida e geométrica.
+-	**Inovação:** associada ao roxo na letra "C", sugerindo que a ferramenta é moderna e diferenciada.
+-	**Motivação e positividade:** evidenciada pelo amarelo na letra "G", que remete à energia e otimismo.
+-	**Urgência pelo impacto social:** representada pelo vermelho, que também transmite paixão e comprometimento.
+
+![Logo do Projeto](/logoprojeto.png)
+![Esboço do Projeto](/esboço.png)
