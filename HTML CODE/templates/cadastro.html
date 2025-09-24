@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - GDCB</title>
+    <link rel="stylesheet" href="../static/cadastro.css">
+</head>
+<body>
+
+    <div class="header-bar">
+        <div class="logo-container">
+            <img src="../static/assets/logo.png" alt="Logo" class="logo-img">
+            <div class="logo-text">
+                <p><strong>GDCB</strong></p>
+                <p>Gerenciador de Doações e Campanhas Beneficente</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="side-image">
+        </div>
+        <div class="login-form-container">
+            <div class="login-card">
+                <h2>CADASTRO</h2>
+                <form>
+                    <div class="input-group">
+                        <label for="ongName">Nome da ONG:</label>
+                        <input type="text" id="ongName" name="ongName">
+                    </div>
+                    <div class="input-group">
+                        <label for="description">Descrição:</label>
+                        <textarea id="description" name="description" rows="4"></textarea>
+                    </div>
+                    <div class="input-group">
+                        <label for="responsibleName">Nome do responsável:</label>
+                        <input type="text" id="responsibleName" name="responsibleName">
+                    </div>
+                    <div class="input-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email">
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">Telefone de contato:</label>
+                        <input type="tel" id="phone" name="phone">
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Senha:</label>
+                        <input type="password" id="password" name="password">
+                    </div>
+                    <button type="submit" class="login-button">Cadastrar ONG</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
