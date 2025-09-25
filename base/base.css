@@ -201,3 +201,100 @@ main {
 .has-submenu.open .submenu {
     display: block;
 }
+
+/* HEADER */
+.top-header {
+    background-color: #ffffff;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 82px; /* Espaço para a sidebar */
+    height: 70px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    transition: left 0.5s;
+}
+
+/* Ajusta o header quando a sidebar estiver aberta */
+#sidebar.open-sidebar ~ .top-header {
+    left: 15%; /* Porcentagem definida para a sidebar aberta */
+}
+
+/* Barra de pesquisa */
+.search-bar {
+    display: flex;
+    align-items: center;
+    background-color: #f1f1f1;
+    border-radius: 20px;
+    padding: 8px 15px;
+    width: 300px;
+    margin-left: 70%;
+}
+
+.search-bar input {
+    border: none;
+    background-color: transparent;
+    outline: none;
+    margin-left: 10px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.search-bar .search-icon {
+    color: #888;
+}
+
+/* Ícones de notificação e mensagens */
+.header-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.header-icons i {
+    color: #555;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.header-icons i:hover {
+    color: #3168ff;
+}
+
+/* Perfil do usuário */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-profile span {
+    font-weight: 500;
+    color: #333;
+}
+
+/* Ajuste do main para o header e a sidebar */
+main {
+    padding: 90px 20px 20px calc(82px + 20px);
+    position: static;
+    z-index: 0;
+    width: 100%;
+    margin-left: 82px;
+    transition: margin-left 0.5s;
+}
+
+#sidebar.open-sidebar ~ main {
+    margin-left: 15%; /* Porcentagem definida para a sidebar aberta */
+    padding-left: 20px; /* Resetar o padding-left para o novo cálculo */
+}
