@@ -1,4 +1,5 @@
 document.getElementById('open_btn').addEventListener('click', function () {
+    // Esta linha já adiciona/remove a classe que o CSS precisa
     document.getElementById('sidebar').classList.toggle('open-sidebar');
 });
 
