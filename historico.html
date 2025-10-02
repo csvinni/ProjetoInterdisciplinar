@@ -1,12 +1,13 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Histórico de Doações</title>
+    <link rel="stylesheet" href="historico.css">
+</head>
+<body>
 
-{% block title %}GDCB - Histórico de Doações{% endblock %}
-
-{% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', path='/historico.css') }}">
-{% endblock %}
-
-{% block content %}
     <div class="historico-wrapper">
         <section class="historico-section">
             <h2>Histórico</h2>
@@ -74,4 +75,6 @@
             </div>
         </section>
     </div>
-{% endblock %}
+
+</body>
+</html>

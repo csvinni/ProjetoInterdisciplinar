@@ -48,3 +48,16 @@ def cadastro_page(request: Request):
         "cadastro.html",  # Rendeiza o HTML do Cadastro
         {"request": request}
     )
+
+@app.get("/historico")
+def historico_page(request: Request):
+    """
+    [NOVA ROTA] Rota para a página de Histórico de Doações.
+    Aqui, você passará os dados reais do histórico para o template no futuro.
+    URL: http://127.0.0.1:8001/historico
+    """
+    # Por enquanto, passamos apenas o objeto 'request'
+    return templates.TemplateResponse(
+        "historico.html",
+        {"request": request}
+    )
