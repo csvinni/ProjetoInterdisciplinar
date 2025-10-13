@@ -1,27 +1,25 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
+from fastapi.responses import HTMLResponse
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from database import create_db_and_tables
-from controllers import campanhas, doacoes  
-from auth.auth import router as auth_router
+from controllers.dashboard import router as dashboard_router
+from auth.routes import router as auth_router
 
-app = FastAPI(title="API de Doações")
+app = FastAPI(title="API de Doações - MVC")
 
-# Evento para criar o banco e as tabelas quando a aplicação iniciar
-@app.on_event("startup")
-def on_startup():
-    create_db_and_tables()
+# Inicializa o banco
+create_db_and_tables()
 
-# Inclui as rotas do módulo campanhas
-app.include_router(campanhas.router, prefix="/campanhas", tags=["Campanhas"])
+# Configura templates e arquivos estáticos
+templates = Jinja2Templates(directory="templates")
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
-# Inclui as rotas do módulo doacoes
-app.include_router(doacoes.router, prefix="/doacoes", tags=["Doações"])
+# Rota principal
+@app.get("/", response_class=HTMLResponse)
+def index(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
-# Inclui as rotas de autenticação (cadastro e login)
-app.include_router(auth_router, prefix="/auth", tags=["Autenticação"])
-
-
-
-# Rota raiz simples para teste
-@app.get("/")
-def raiz():
-    return {"msg": "API de Doações está online!"}
+# Inclui as rotas da pasta auth
+app.include_router(auth_router)
+app.include_router(dashboard_router)

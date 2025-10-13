@@ -36,16 +36,9 @@ class Doador(SQLModel, table=True):
     nome: str
     email: str = Field(unique=True)
     telefone: str
-    senha: str
     data_criacao: date = Field(default_factory=date.today)
 
     doacoes: List["Doacao"] = Relationship(back_populates="doador")
-
-    def set_password(self, password: str):
-        self.senha = generate_password_hash(password)
-
-    def check_password(self, password: str) -> bool:
-        return check_password_hash(self.senha, password)
 
 
 # -----------------------------

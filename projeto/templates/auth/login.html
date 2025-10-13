@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - GDCB</title>
+    <link rel="stylesheet" href="../static/login.css">
+</head>
+<body>
+
+    <div class="header-bar">
+        <div class="logo-container">
+            <img src="../static/assets/logo.png" alt="Logo" class="logo-img">
+            <div class="logo-text">
+                <p><strong>GDCB</strong></p>
+                <p>Gerenciador de Doações e Campanhas Beneficente</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="login-container">
+        <div class="side-image">
+            </div>
+        <div class="login-form-container">
+            <div class="login-card">
+                <h2>LOGIN</h2>
+                <form action="/auth/login" method="post">
+                    <div class="input-group">
+                        <label for="email">E-mail:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="senha">Senha:</label>
+                        <input type="password" id="senha" name="senha" required>
+                    </div>
+                    <button type="submit" class="login-button">ENTRAR</button>
+                </form>                
+            </div>
+        </div>
+    </div>
+</body>
+</html>
