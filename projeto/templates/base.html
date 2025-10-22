@@ -96,13 +96,15 @@
             </button>
         </div>
 
-        <div id="logout">
-            <button id="logout_btn">
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <span class="item-description">
-                    Logout
-                </span>
-            </button>
+      <div id="logout">
+            <a href="{{ url_for('logout') }}">
+                <button id="logout_btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="item-description">
+                        Logout
+                    </span>
+                </button>
+            </a>  <!-- FECHOU A TAG A -->
         </div>
     </nav>
 

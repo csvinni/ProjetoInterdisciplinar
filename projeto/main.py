@@ -5,8 +5,12 @@ from fastapi.staticfiles import StaticFiles
 from database import create_db_and_tables
 from controllers.dashboard import router as dashboard_router
 from auth.routes import router as auth_router
+from starlette.middleware.sessions import SessionMiddleware
+
 
 app = FastAPI(title="API de Doações - MVC")
+app.add_middleware(SessionMiddleware, secret_key="chave_super_secreta")
+
 
 # Inicializa o banco
 create_db_and_tables()
