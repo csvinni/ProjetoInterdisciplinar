@@ -10,4 +10,4 @@ templates = Jinja2Templates(directory="templates")
 
 @router.get("/", response_class=HTMLResponse)
 def dashboard_home(request: Request, session: Session = Depends(get_session)):
-    return templates.TemplateResponse("home.html", {"request": request})
+    return templates.TemplateResponse("historico.html", {"request": request})
