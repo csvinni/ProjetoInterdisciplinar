@@ -36,7 +36,6 @@ def login(
     return RedirectResponse(url="/dashboard", status_code=HTTP_302_FOUND)
 
 
-
 @router.get("/cadastro", response_class=HTMLResponse)
 def cadastro_page(request: Request):
     return templates.TemplateResponse("auth/cadastro.html", {"request": request})

@@ -6,6 +6,7 @@ from database import create_db_and_tables
 from controllers.dashboard import router as dashboard_router
 from auth.routes import router as auth_router
 from starlette.middleware.sessions import SessionMiddleware
+from controllers.campanhas import router as campanhas
 
 
 app = FastAPI(title="API de Doações - MVC")
@@ -26,4 +27,5 @@ def index(request: Request):
 
 # Inclui as rotas da pasta auth
 app.include_router(auth_router)
+app.include_router(campanhas)
 app.include_router(dashboard_router)
