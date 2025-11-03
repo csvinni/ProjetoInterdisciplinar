@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %}Lista de Lançamentos{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', path='/card_campanha.css') }}">
+{% endblock %}
+
+{% block content %}
+    <div class="cards-container">
+        {% for campanha in campanhas %}
+        <div class="card-campanha">
+            <div class="card-header">
+                <h3 class="campanha-titulo">{{ campanha.titulo }}</h3>
+                <p class="campanha-descricao">{{ campanha.descricao }}</p>
+            </div>
+
+            <div class="card-body">
+                <div class="info-bloco metas">
+                    <div class="info-item">
+                        <span class="label">Meta financeira</span>
+                        <span class="valor">{{ campanha.meta_financeira }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Meta itens</span>
+                        <span class="valor">{{ campanha.meta_itens }}</span>
+                    </div>
+                </div>
+
+                <div class="info-bloco datas">
+                    <div class="info-item">
+                        <span class="label">Data início</span>
+                        <span class="valor-data">{{ campanha.data_inicio.strftime('%d/%m/%Y') if campanha.data_inicio else '-' }}</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">Data fim</span>
+                        <span class="valor-data">{{ campanha.data_fim.strftime('%d/%m/%Y') if campanha.data_fim else '-' }}</span>
+                    </div>
+                </div>
+
+                <div class="info-bloco status-row">
+                    <span class="label">Status</span>
+                    <div class="status-display">
+                        <div class="status-indicator {{ campanha.status | lower }}"></div>
+                        <span class="status-texto">{{ campanha.status }}</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-excluir">Excluir</button>
+                <button class="btn btn-editar">Editar</button>
+                <button class="btn btn-visualizar">Visualizar doações</button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

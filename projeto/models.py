@@ -60,8 +60,8 @@ class Campanha(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
     titulo: str
     descricao: str
-    meta_financeira: str
-    meta_itens: str
+    meta_financeira: float | None = None
+    meta_itens: int | None = None
     data_inicio: Optional[date]
     data_fim: Optional[date]
     status: str

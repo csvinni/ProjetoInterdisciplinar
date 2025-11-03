@@ -1,0 +1,171 @@
+/* Estilos Específicos do Cartão */
+.card-campanha {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px;
+    width: 280px; /* Largura pequena para permitir o layout em grade */
+    display: flex;
+    flex-direction: column;
+    margin: 10px; /* Espaço entre os cartões no layout de grade */
+}
+
+/* Container para a grade de cartões (para simular a Imagem 1) */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap; /* Quebra a linha quando não há espaço */
+    gap: 20px;
+    padding: 20px;
+    justify-content: center; /* Centraliza os cartões */
+}
+
+
+/* Título e Header */
+.card-header {
+    border-left: 5px solid #e6ae40; /* Linha Laranja */
+    padding-left: 10px;
+    margin-bottom: 15px;
+}
+
+.campanha-titulo {
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.campanha-descricao {
+    font-size: 14px;
+    color: #888;
+    margin-top: 2px;
+}
+
+/* Corpo do Cartão - Grid de Informações */
+.card-body {
+    display: grid;
+    /* Define o layout em duas colunas com ênfase nas informações */
+    grid-template-columns: 1.5fr 1fr; 
+    gap: 15px 10px;
+    margin-bottom: 20px;
+}
+
+/* Estilos dos Blocos de Informação */
+.info-bloco {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-bloco.metas .info-item,
+.info-bloco.datas .info-item {
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    display: block;
+}
+
+.valor {
+    font-size: 16px;
+    font-weight: 700;
+    color: #333;
+    display: block;
+    margin-top: 2px;
+}
+
+.valor-data {
+    font-size: 14px;
+    color: #333;
+    display: block;
+    margin-top: 2px;
+}
+
+/* Status Row */
+/* Status Row SIMPLIFICADA */
+.status-row {
+    display: flex;
+    flex-direction: column; /* Coloca o Label "Status" em cima */
+    align-items: flex-start;
+    grid-column: 1 / 3;
+    margin-top: 10px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0; 
+}
+
+/* Container que alinha o círculo e o texto */
+.status-display {
+    display: flex;
+    align-items: center;
+    margin-top: 5px; /* Espaço entre o Label "Status" e a informação */
+}
+
+.status-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    margin-right: 8px;
+    flex-shrink: 0;
+}
+
+/* Cores de Status */
+.status-indicator.ativa {
+    background-color: #4CAF50; /* Verde */
+}
+.status-indicator.concluida {
+    background-color: #dc3d33; /* Vermelho/Encerrada */
+}
+
+.status-texto {
+    font-size: 15px;
+    font-weight: 600;
+    color: #333;
+    /* O texto será "Ativa" ou "Concluída", conforme setado pelo backend/JS */
+}
+/* Se precisar mostrar o status 'Concluída' como texto puro sem radio, use esta classe: */
+.concluida-texto {
+    /* Exemplo: .status-texto.concluida-texto { color: #F44336; } */
+    display: none; /* Escondido por padrão, use JS/Back-end para mostrar o status correto */
+}
+
+
+/* Rodapé e Botões */
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-top: auto; /* Garante que os botões fiquem sempre na parte inferior */
+}
+
+.btn {
+    padding: 10px 8px;
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.2s;
+    flex-grow: 1; /* Distribui o espaço igualmente */
+}
+
+/* Cores dos Botões (baseado na Imagem 2) */
+.btn-excluir {
+    background-color: #dc3d33; /* Vermelho */
+    color: black;
+}
+
+.btn-editar {
+    background-color: #845bd4; /* Roxo */
+    color: black;
+}
+
+.btn-visualizar {
+    background-color: #e6ae40; /* Laranja */
+    color: #333; /* Texto escuro para contraste */
+}
+
+.btn:hover {
+    opacity: 0.9;
+}
