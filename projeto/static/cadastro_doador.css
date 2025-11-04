@@ -1,0 +1,134 @@
+/* Estilos Globais e do Container (Aprimorados) */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna */
+    background-color: #f4f7f9; /* Fundo mais claro e suave */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.modal-container {
+    background-color: white;
+    padding: 40px; /* Aumenta o padding para mais "respiro" */
+    border-radius: 16px; /* Cantos mais arredondados */
+    /* Sombra mais suave e distribuída */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    width: 90%;
+    max-width: 550px; /* Um pouco mais largo para melhor distribuição */
+    position: relative;
+}
+
+/* Título e Botão de Fechar */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    
+    /* LINHA DE DESTAQUE: Adiciona a linha vertical laranja */
+    border-left: 5px solid #ffaa00; 
+    padding-left: 15px; /* Aumenta o padding para dar espaço entre a linha e o texto */
+    padding-bottom: 5px; /* Para harmonizar a altura da linha */
+    
+}
+
+.header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin: 0;
+    color: #333;
+}
+
+
+.close-button {
+    background: none;
+    border: none;
+    font-size: 28px;
+    font-weight: 300; /* Mais fino */
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s;
+}
+
+.close-button:hover {
+    color: #333;
+}
+
+/* Estrutura das Linhas e Campos do Formulário */
+.form-row {
+    display: flex;
+    gap: 20px; /* Aumenta o espaçamento entre campos */
+    margin-bottom: 20px; /* Aumenta o espaçamento entre linhas */
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.form-field label {
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #555;
+    font-weight: 600;
+}
+
+/* Estilização dos Inputs (Visual Clean) */
+/* Removido .form-field textarea daqui */
+.form-field input { 
+    padding: 12px; /* Aumenta o padding */
+    border-radius: 8px; /* Cantos arredondados */
+    font-size: 16px;
+    background-color: #ffffff;
+    border: 1px solid #ddd; /* Borda sutil */
+    height: 44px; /* Altura padrão para campos de texto */
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Efeito de Foco (Melhora a UX) */
+/* Removido .form-field textarea:focus daqui */
+.form-field input:focus { 
+    border-color: #f7a048; /* Laranja no foco */
+    box-shadow: 0 0 0 3px rgba(247, 160, 72, 0.2); /* Sombra suave no foco */
+    outline: none; /* Remove o outline padrão do navegador */
+}
+
+/* Regras de Layout de Colunas Removidas, exceto a column-1 */
+.column-1 {
+    width: 100%;
+}
+
+/* Estilos para Status (Radio Buttons) Removidos, pois não são necessários para Nome, Email, Telefone */
+
+/* Estilo do Botão Cadastrar (Efeito Elevado) */
+.submit-button {
+    width: 100%;
+    padding: 14px; /* Aumenta o padding */
+    background-color: #e59a34; /* Cor principal do botão */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 40px;
+    /* Sombra para dar profundidade (efeito "flutuante") */
+    box-shadow: 0 5px 15px rgba(229, 154, 52, 0.4);
+    transition: background-color 0.2s, box-shadow 0.2s, transform 0.1s;
+}
+
+.submit-button:hover {
+    background-color: #cc892e;
+    box-shadow: 0 7px 20px rgba(229, 154, 52, 0.6);
+    transform: translateY(-1px); /* Leve subida no hover */
+}
+
+.submit-button:active {
+    transform: translateY(0);
+    box-shadow: 0 3px 10px rgba(229, 154, 52, 0.4);
+}
