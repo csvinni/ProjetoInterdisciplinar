@@ -5,6 +5,9 @@ from fastapi.staticfiles import StaticFiles
 from database import create_db_and_tables
 from controllers.dashboard import router as dashboard_router
 from auth.routes import router as auth_router
+from controllers.doadores import router as doador_router
+from controllers.doacoes import router as doacao_router
+
 from starlette.middleware.sessions import SessionMiddleware
 from controllers.campanhas import router as campanhas
 
@@ -29,3 +32,5 @@ def index(request: Request):
 app.include_router(auth_router)
 app.include_router(campanhas)
 app.include_router(dashboard_router)
+app.include_router(doador_router)
+app.include_router(doacao_router)
