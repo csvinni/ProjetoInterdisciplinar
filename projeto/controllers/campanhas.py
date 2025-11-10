@@ -37,12 +37,12 @@ def cadastro_campanha(
     session.add(nova_campanha)
     session.commit()
     session.refresh(nova_campanha)
+    # Garante que o objeto retornado seja um dicionário/JSON (o JavaScript espera isso)
     return {"message": "Campanha criada com sucesso!", "campanha": nova_campanha}
 
-
-@router.get("/cadastro_campanha", response_class=HTMLResponse)
-def mostrar_formulario(request: Request):
-    return templates.TemplateResponse("cadastro_campanha.html", {"request": request})
+# @router.get("/cadastro_campanha", response_class=HTMLResponse)
+# def mostrar_formulario(request: Request):
+#     return templates.TemplateResponse("cadastro_campanha.html", {"request": request})
 
 
 @router.get("/{campanha_id}", response_model=Campanha)

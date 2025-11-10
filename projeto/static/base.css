@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
 * {
     margin: 0;
     padding: 0;
@@ -14,13 +13,9 @@ body {
     background-color: #ebebeb;
 }
 
-main {
-    padding: 20px;
-    position: fixed;
-    z-index: 1;
-    padding-left: calc(82px + 20px);
-}
-
+/* ---------------------------------------------------- */
+/* --- SIDEBAR CORRIGIDA: Usa position: fixed e top: 0 --- */
+/* ---------------------------------------------------- */
 #sidebar {
     display: flex;
     flex-direction: column;
@@ -28,10 +23,13 @@ main {
     background-color: #ffffff;
     height: 100vh;
     border-radius: 0px 18px 18px 0px;
-    position: relative;
+    /* CORREÇÃO: Deve ser fixed para ficar no topo */
+    position: fixed; 
+    left: 0; /* Garante que está na esquerda */
+    top: 0;  /* Garante que está no topo */
     transition: all .5s;
     min-width: 82px;
-    z-index: 2;
+    z-index: 20;
 }
 
 #sidebar_content {
@@ -203,7 +201,10 @@ main {
     display: block;
 }
 
-/* HEADER */
+/* ---------------------------------------------------- */
+/* --- HEADER (.top-header) CONSOLIDADO --- */
+/* ---------------------------------------------------- */
+
 .top-header {
     background-color: #ffffff;
     padding: 15px 30px;
@@ -216,7 +217,7 @@ main {
     left: 82px; /* Espaço para a sidebar */
     height: 70px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1;
+    z-index: 10; /* Aumentado para garantir visibilidade */
     transition: left 0.5s;
 }
 
@@ -285,114 +286,28 @@ main {
     color: #333;
 }
 
+/* ---------------------------------------------------- */
+/* --- MAIN CONSOLIDADO: Ocupa o espaço restante --- */
+/* ---------------------------------------------------- */
+
 /* Ajuste do main para o header e a sidebar */
 main {
-    padding: 90px 20px 20px calc(82px + 20px);
-    position: static;
+    /* Padding superior para compensar o header fixo de 70px */
+    padding: 90px 20px 20px 20px; 
+    
+    /* Afasta o MAIN da sidebar */
+    margin-left: 82px; 
+    
+    /* Permite que o MAIN role (Removido o position: fixed incorreto) */
+    position: static; 
     z-index: 0;
     width: 100%;
-    margin-left: 82px;
+    /* Removido o padding-left: calc(82px + 20px) duplicado */
     transition: margin-left 0.5s;
 }
 
 #sidebar.open-sidebar ~ main {
     margin-left: 15%; /* Porcentagem definida para a sidebar aberta */
-    padding-left: 20px; /* Resetar o padding-left para o novo cálculo */
+    padding-left: 20px; 
 }
 
-/* HEADER */
-.top-header {
-    background-color: #ffffff;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    left: 82px; /* Espaço para a sidebar */
-    height: 70px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    transition: left 0.5s;
-}
-
-/* Ajusta o header quando a sidebar estiver aberta */
-#sidebar.open-sidebar ~ .top-header {
-    left: 15%; /* Porcentagem definida para a sidebar aberta */
-}
-
-/* Barra de pesquisa */
-.search-bar {
-    display: flex;
-    align-items: center;
-    background-color: #f1f1f1;
-    border-radius: 20px;
-    padding: 8px 15px;
-    width: 300px;
-    margin-left: 70%;
-}
-
-.search-bar input {
-    border: none;
-    background-color: transparent;
-    outline: none;
-    margin-left: 10px;
-    font-size: 14px;
-    width: 100%;
-}
-
-.search-bar .search-icon {
-    color: #888;
-}
-
-/* Ícones de notificação e mensagens */
-.header-icons {
-    display: flex;
-    gap: 20px;
-}
-
-.header-icons i {
-    color: #555;
-    font-size: 20px;
-    cursor: pointer;
-    transition: color 0.3s;
-}
-
-.header-icons i:hover {
-    color: #3168ff;
-}
-
-/* Perfil do usuário */
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.user-profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.user-profile span {
-    font-weight: 500;
-    color: #333;
-}
-
-/* Ajuste do main para o header e a sidebar */
-main {
-    padding: 90px 20px 20px calc(82px + 20px);
-    position: static;
-    z-index: 0;
-    width: 100%;
-    margin-left: 82px;
-    transition: margin-left 0.5s;
-}
-
-#sidebar.open-sidebar ~ main {
-    margin-left: 15%; /* Porcentagem definida para a sidebar aberta */
-    padding-left: 20px; /* Resetar o padding-left para o novo cálculo */
-}

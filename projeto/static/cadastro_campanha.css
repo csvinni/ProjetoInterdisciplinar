@@ -181,3 +181,40 @@ body {
     transform: translateY(0);
     box-shadow: 0 3px 10px rgba(229, 154, 52, 0.4);
 }
+
+/* O Overlay - Cobre toda a tela, define a posição e esconde por padrão */
+.modal_overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Fundo semi-transparente escuro */
+    background-color: rgba(0, 0, 0, 0.6); 
+    /* Coloca o modal acima de todo o conteúdo */
+    z-index: 1000; 
+    /* Centraliza o conteúdo (o seu .modal_container) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* Por padrão, escondido */
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+/* Classe para MOSTRAR o modal */
+.modal_overlay.visible {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Transição de entrada do seu .modal_container para combinar com a transição que adicionei */
+.modal_overlay .modal_container {
+    transform: scale(0.9);
+    transition: transform 0.3s ease-out;
+}
+
+.modal_overlay.visible .modal_container {
+    transform: scale(1);
+}
