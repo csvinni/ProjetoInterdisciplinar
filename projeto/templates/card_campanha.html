@@ -57,8 +57,25 @@
                 </div>
 
                 <div class="card-footer">
-                    <button class="btn btn-excluir">Excluir</button>
-                    <button class="btn btn-editar">Editar</button>
+                    <form action="/campanhas/deletar/{{ campanha.id }}" method="post" style="display: inline;">
+                        <button type="submit" class="btn btn-excluir" onclick="return confirm('Tem certeza que deseja EXCLUIR a campanha {{ campanha.titulo }}?')">
+                            Excluir
+                        </button>
+                    </form>
+                    <button 
+                            class="btn btn-editar"
+                            onclick="openEditModal(
+                                {{ campanha.id }}, 
+                                '{{ campanha.titulo }}', 
+                                '{{ campanha.descricao }}', 
+                                {{ campanha.meta_financeira }}, 
+                                {{ campanha.meta_itens }}, 
+                                '{{ campanha.data_inicio.strftime('%Y-%m-%d') if campanha.data_inicio else '' }}', 
+                                '{{ campanha.data_fim.strftime('%Y-%m-%d') if campanha.data_fim else '' }}', 
+                                '{{ campanha.status }}'
+                            )">
+                        Editar
+                    </button>
                     <button class="btn btn-visualizar">Visualizar doações</button>
                 </div>
             </div>
@@ -131,6 +148,6 @@
             </form>
         </div>
     </div>
-    <script src="{{ url_for('static', path='/JavaScript/modal_campanha.js') }}"></script>
+    <script src="{{ url_for('static', path='/javaScript/modal_campanha.js') }}"></script>
 
 {% endblock %}
