@@ -10,3 +10,4 @@ document.querySelectorAll(".submenu-toggle").forEach(toggle => {
         parent.classList.toggle("open");
     });
 });
+
