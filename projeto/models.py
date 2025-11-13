@@ -7,26 +7,6 @@ from pydantic import BaseModel
 
 
 # -----------------------------
-# Admin
-# -----------------------------
-class Admin(SQLModel, table=True):
-    __tablename__ = 'admin'
-
-    id: Optional[int] = Field(default=None, primary_key=True)
-    nome: str
-    email: str = Field(unique=True)
-    senha: str
-    ong: str
-    data_criacao: date = Field(default_factory=date.today)
-
-    def set_password(self, password: str):
-        self.senha = generate_password_hash(password)
-
-    def check_password(self, password: str) -> bool:
-        return check_password_hash(self.senha, password)
-
-
-# -----------------------------
 # Doador
 # -----------------------------
 class Doador(SQLModel, table=True):
@@ -68,10 +48,39 @@ class Campanha(SQLModel, table=True):
     data_criacao: date = Field(default_factory=date.today)
     categoria_id: Optional[int] = Field(default=None, foreign_key="categorias.id")
 
+    # 🔑 NOVO CAMPO DE CHAVE ESTRANGEIRA
+    admin_id: int = Field(foreign_key="admin.id") 
+    
+    # Relação de volta para o Admin (Opcional, mas útil)
+    admin: Optional["Admin"] = Relationship(back_populates="campanhas")
+
     doacoes: List["Doacao"] = Relationship(back_populates="campanha")
     relatorios: List["Relatorio"] = Relationship(back_populates="campanha")
 
 
+# -----------------------------
+# Admin (Atualização)
+# -----------------------------
+class Admin(SQLModel, table=True):
+    __tablename__ = 'admin'
+
+    id: Optional[int] = Field(default=None, primary_key=True)
+    nome: str
+    email: str = Field(unique=True)
+    senha: str
+    ong: str
+    data_criacao: date = Field(default_factory=date.today)
+
+    # 🔑 NOVA RELAÇÃO (Back-Populates)
+    campanhas: List["Campanha"] = Relationship(back_populates="admin")
+
+    def set_password(self, password: str):
+        self.senha = generate_password_hash(password)
+
+    def check_password(self, password: str) -> bool:
+        return check_password_hash(self.senha, password)
+    
+    
 # -----------------------------
 # Doacao
 # -----------------------------

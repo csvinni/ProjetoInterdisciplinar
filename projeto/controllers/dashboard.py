@@ -16,7 +16,13 @@ def dashboard(
     user: dict = Depends(get_current_user),
     session: Session = Depends(get_session)
 ):
-    campanhas = session.exec(select(Campanha)).all()  # busca todas as campanhas
+    # 1. Obtém o ID do Admin logado
+    admin_id = user.get("id") 
+    
+    # 2. Filtra as campanhas pelo admin_id
+    statement = select(Campanha).where(Campanha.admin_id == admin_id)
+    campanhas = session.exec(statement).all()
+    
     return templates.TemplateResponse(
         "card_campanha.html",
         {"request": request, "user": user, "campanhas": campanhas}

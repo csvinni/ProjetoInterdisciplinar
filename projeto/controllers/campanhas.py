@@ -8,6 +8,7 @@ from datetime import date
 from fastapi.templating import Jinja2Templates
 from fastapi import Request
 from fastapi.responses import HTMLResponse, RedirectResponse
+from auth.routes import get_current_user
 
 
 router = APIRouter(prefix="/campanhas", tags=["Campanhas"])
@@ -23,8 +24,10 @@ def cadastro_campanha(
     data_inicio: date = Form(...),
     data_fim: date = Form(...),
     status: str = Form(...),
-    session: Session = Depends(get_session)
+    session: Session = Depends(get_session),
+    user: dict = Depends(get_current_user),
 ):
+    admin_id = user.get("id")
     nova_campanha = Campanha(
         titulo=titulo,
         descricao=descricao,
@@ -32,7 +35,8 @@ def cadastro_campanha(
         meta_itens=meta_itens,
         data_inicio=data_inicio,
         data_fim=data_fim,
-        status=status
+        status=status,
+        admin_id=admin_id
     )
     session.add(nova_campanha)
     session.commit()
