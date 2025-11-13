@@ -4,75 +4,85 @@ from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
 from typing import List
 from datetime import date
-from models import Doacao, Doador
+from models import Doacao, Doador, Campanha
 from database import get_session
 
 router = APIRouter(prefix="/doacoes", tags=["Doações"])
 templates = Jinja2Templates(directory="templates")
 
 
-# 🧠 1. Exibir o formulário de cadastro
-@router.get("/cadastro", response_class=HTMLResponse,  name="formulario_doacao")
+# 1️⃣ Formulário de cadastro
+@router.get("/cadastro", response_class=HTMLResponse, name="formulario_doacao")
 def formulario_doacao(request: Request, session: Session = Depends(get_session)):
-    doadores = session.exec(select(Doador)).all()  # pega os doadores cadastrados
+    doadores = session.exec(select(Doador)).all()
+    campanhas = session.exec(select(Campanha)).all()
     return templates.TemplateResponse(
-        "cadastro_doacoes.html", {"request": request, "doadores": doadores}
+        "cadastro_doacoes.html",
+        {"request": request, "doadores": doadores, "campanhas": campanhas},
     )
 
 
-# 💾 2. Cadastrar doação (POST)
+# 2️⃣ Cadastro (POST)
 @router.post("/cadastro")
 def cadastrar_doacao(
-    doador: int = Form(...),
+    id_doador: int = Form(...),
+    id_campanha: int = Form(...),
     tipo_doacao: str = Form(...),
-    quantidade_dinheiro: str = Form(None),
-    descricao_itens: str = Form(None),
+    valor: str = Form(None),
+    tipo_item: str = Form(None),
+    quantidade: str = Form(None),
     data_doacao_dinheiro: str = Form(None),
     data_doacao_itens: str = Form(None),
     session: Session = Depends(get_session),
 ):
-    # Verifica se o doador existe
-    doador_existente = session.get(Doador, doador)
-    if not doador_existente:
-        raise HTTPException(status_code=404, detail="Doador não encontrado")
+    # Conversões seguras
+    valor = float(valor) if valor else None
+    quantidade = int(quantidade) if quantidade else None
 
-    # Define a data
+    doador_existente = session.get(Doador, id_doador)
+    campanha_existente = session.get(Campanha, id_campanha)
+
+    if not doador_existente or not campanha_existente:
+        raise HTTPException(status_code=404, detail="Doador ou campanha não encontrados")
+
     if tipo_doacao == "dinheiro":
         data_doacao = (
             date.fromisoformat(data_doacao_dinheiro)
             if data_doacao_dinheiro
             else date.today()
         )
-        descricao = f"Doação em dinheiro: {quantidade_dinheiro}"
     else:
         data_doacao = (
             date.fromisoformat(data_doacao_itens)
             if data_doacao_itens
             else date.today()
         )
-        descricao = f"Doação em itens: {descricao_itens}"
 
     nova_doacao = Doacao(
-        doador_id=doador_existente.id,
-        tipo=tipo_doacao,
-        descricao=descricao,
+        id_doador=id_doador,
+        id_campanha=id_campanha,
+        tipo_doacao=tipo_doacao,
+        valor=valor,
+        tipo_item=tipo_item,
+        quantidade=quantidade,
         data_doacao=data_doacao,
+        status="confirmada",
     )
 
     session.add(nova_doacao)
     session.commit()
-    session.refresh(nova_doacao)
 
-    return RedirectResponse(url="/doacoes/sucesso", status_code=303)
+    return RedirectResponse(url="/dashboard", status_code=303)
 
 
-# 🎉 3. Página de sucesso
+
+# 3️⃣ Página de sucesso
 @router.get("/sucesso", response_class=HTMLResponse)
 def sucesso(request: Request):
-    return templates.TemplateResponse("cadastro_sucesso.html", {"request": request})
+    return templates.TemplateResponse("card_campanha.html", {"request": request})
 
 
-# 🧾 4. (mantém suas rotas API)
+# 4️⃣ Listagem
 @router.get("/", response_model=List[Doacao])
 def listar_doacoes(session: Session = Depends(get_session)):
     return session.exec(select(Doacao)).all()
