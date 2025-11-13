@@ -59,8 +59,7 @@
                         <i class="fa-solid fa-chevron-down arrow"></i>
                     </a>
                     <ul class="submenu">
-                        <li><a href="{{ url_for('cadastro_campanha') }}">Campanhas</a></li>
-                        <li><a href="{{ url_for('formulario_doacao') }}">Doação</a></li>
+                        <li><a href="#" id="openDoacaoModal">Doação</a></li>
                         <li><a href="#" id="openDoadorModal">Doador</a></li>
                     </ul>
                 </li>
@@ -157,6 +156,56 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modalOverlay = document.getElementById("modalOverlay");
+    const modalContent = document.getElementById("modalContent");
+
+    // 🔹 Modal de DOADOR (já existente)
+    const openDoadorBtn = document.getElementById("openDoadorModal");
+    if (openDoadorBtn) {
+        openDoadorBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const response = await fetch("/doadores/cadastro");
+            const html = await response.text();
+            modalContent.innerHTML = html;
+            modalOverlay.style.display = "flex";
+        });
+    }
+
+    // 🔹 Modal de DOAÇÃO (novo)
+    const openDoacaoBtn = document.getElementById("openDoacaoModal");
+    if (openDoacaoBtn) {
+        openDoacaoBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const response = await fetch("/doacoes/cadastro");
+            const html = await response.text();
+            modalContent.innerHTML = html;
+            modalOverlay.style.display = "flex";
+
+            // Garante que o JS do formulário (doacoes.js) funcione dentro do modal
+            const script = document.createElement("script");
+            script.src = "{{ url_for('static', path='/javaScript/doacoes.js') }}";
+            script.defer = true;
+            document.body.appendChild(script);
+        });
+    }
+
+    // 🔹 Fecha o modal ao clicar fora dele
+    modalOverlay.addEventListener("click", (e) => {
+        if (e.target.id === "modalOverlay") {
+            modalOverlay.style.display = "none";
+        }
+    });
+
+    // 🔹 Fecha o modal ao clicar no botão ×
+    document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("close-button")) {
+            modalOverlay.style.display = "none";
+        }
+    });
+});
+
 </script>
 
     {% endblock %}
