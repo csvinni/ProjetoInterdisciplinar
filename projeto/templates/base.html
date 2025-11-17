@@ -117,96 +117,88 @@
     <!-- Script JS da base (será criado a seguir) -->
    <script src="{{ url_for('static', path='/javaScript/base.js') }}"></script>
     
-    <!-- BLOCO PARA SCRIPTS ESPECÍFICOS -->
-    {% block scripts %}
-    <!-- 🔸 MODAL GLOBAL PARA FORMULÁRIOS -->
-<div id="modalOverlay" class="modal-overlay" style="display: none;">
-    <div id="modalContent" class="modal-content"></div>
-</div>
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const modalOverlay = document.getElementById("modalOverlay");
-    const modalContent = document.getElementById("modalContent");
-    const openDoadorBtn = document.getElementById("openDoadorModal");
-
-    // Abre o modal e carrega o conteúdo de /doadores/cadastro
-    if (openDoadorBtn) {
-        openDoadorBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const response = await fetch("/doadores/cadastro");
-            const html = await response.text();
-            modalContent.innerHTML = html;
-            modalOverlay.style.display = "flex";
-
-            // Fecha o modal ao clicar no botão ×
-            const closeButton = modalContent.querySelector(".close-button");
-            if (closeButton) {
-                closeButton.addEventListener("click", () => {
-                    modalOverlay.style.display = "none";
-                });
-            }
-        });
-    }
-
-    // Fecha o modal ao clicar fora dele
-    modalOverlay.addEventListener("click", (e) => {
-        if (e.target.id === "modalOverlay") {
-            modalOverlay.style.display = "none";
-        }
-    });
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-    const modalOverlay = document.getElementById("modalOverlay");
-    const modalContent = document.getElementById("modalContent");
-
-    // 🔹 Modal de DOADOR (já existente)
-    const openDoadorBtn = document.getElementById("openDoadorModal");
-    if (openDoadorBtn) {
-        openDoadorBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const response = await fetch("/doadores/cadastro");
-            const html = await response.text();
-            modalContent.innerHTML = html;
-            modalOverlay.style.display = "flex";
-        });
-    }
-
-    // 🔹 Modal de DOAÇÃO (novo)
-    const openDoacaoBtn = document.getElementById("openDoacaoModal");
-    if (openDoacaoBtn) {
-        openDoacaoBtn.addEventListener("click", async (e) => {
-            e.preventDefault();
-            const response = await fetch("/doacoes/cadastro");
-            const html = await response.text();
-            modalContent.innerHTML = html;
-            modalOverlay.style.display = "flex";
-
-            // Garante que o JS do formulário (doacoes.js) funcione dentro do modal
-            const script = document.createElement("script");
-            script.src = "{{ url_for('static', path='/javaScript/doacoes.js') }}";
-            script.defer = true;
-            document.body.appendChild(script);
-        });
-    }
-
-    // 🔹 Fecha o modal ao clicar fora dele
-    modalOverlay.addEventListener("click", (e) => {
-        if (e.target.id === "modalOverlay") {
-            modalOverlay.style.display = "none";
-        }
-    });
-
-    // 🔹 Fecha o modal ao clicar no botão ×
-    document.addEventListener("click", (e) => {
-        if (e.target.classList.contains("close-button")) {
-            modalOverlay.style.display = "none";
-        }
-    });
-});
-
-</script>
+   {% block scripts %}
+   <!-- 🔸 MODAL GLOBAL PARA FORMULÁRIOS -->
+   <div id="modalOverlay" class="modal-overlay" style="display: none;">
+       <div id="modalContent" class="modal-content"></div>
+   </div>
+   
+   <script>
+   document.addEventListener("DOMContentLoaded", () => {
+   
+       const modalOverlay = document.getElementById("modalOverlay");
+       const modalContent = document.getElementById("modalContent");
+   
+       // 🔹 Botões de abrir modal
+       const openDoadorBtn = document.getElementById("openDoadorModal");
+       const openDoacaoBtn = document.getElementById("openDoacaoModal");
+   
+       // -------- Função PARA CARREGAR JS DINÂMICO --------
+       async function loadScript(src) {
+           return new Promise((resolve, reject) => {
+               // remove scripts anteriores (se houver)
+               const old = document.querySelector("script[data-modal-script]");
+               if (old) old.remove();
+   
+               const s = document.createElement("script");
+               s.src = src;
+               s.dataset.modalScript = "true";
+               s.onload = resolve;
+               s.onerror = reject;
+   
+               document.body.appendChild(s);
+           });
+       }
+   
+       // -------------- MODAL DOADOR -------------------
+       if (openDoadorBtn) {
+           openDoadorBtn.addEventListener("click", async (e) => {
+               e.preventDefault();
+               
+               const html = await (await fetch("/doadores/cadastro")).text();
+               modalContent.innerHTML = html;
+               modalOverlay.style.display = "flex";
+           });
+       }
+   
+       // -------------- MODAL DOAÇÃO -------------------
+       if (openDoacaoBtn) {
+           openDoacaoBtn.addEventListener("click", async (e) => {
+               e.preventDefault();
+   
+               const response = await fetch("/doacoes/cadastro");
+               const html = await response.text();
+   
+               modalContent.innerHTML = html;
+               modalOverlay.style.display = "flex";
+   
+               // carregar JS do formulário
+               await loadScript("{{ url_for('static', path='/javaScript/doacoes.js') }}");
+   
+               // 🔹 inicializa a funcionalidade do formulário (ex: mostrar/ocultar seções)
+               if (typeof initDoacoesForm === "function") {
+                   initDoacoesForm();
+               }
+   
+               console.log("doacoes.js carregado e inicializado!");
+           });
+       }
+   
+       // -------------- FECHAR MODAL --------------------
+       modalOverlay.addEventListener("click", (e) => {
+           if (e.target.id === "modalOverlay") {
+               modalOverlay.style.display = "none";
+           }
+       });
+   
+       document.addEventListener("click", (e) => {
+           if (e.target.classList.contains("close-button")) {
+               modalOverlay.style.display = "none";
+           }
+       });
+   
+   });
+   </script>
 
     {% endblock %}
 
