@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException, Request, Form
+from fastapi import APIRouter, Depends, HTTPException, Request, Form, Query
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from sqlmodel import Session, select
@@ -86,3 +86,83 @@ def sucesso(request: Request):
 @router.get("/", response_model=List[Doacao])
 def listar_doacoes(session: Session = Depends(get_session)):
     return session.exec(select(Doacao)).all()
+
+# 5️⃣ Página de histórico (HTML)
+@router.get("/historico", response_class=HTMLResponse)
+def historico_doacoes(
+    request: Request,
+    campanha_id: str | None = Query(None),
+    doador_id: str | None = Query(None),
+    tipo: str | None = Query(None),
+    data: str | None = Query(None),
+    session: Session = Depends(get_session),
+):
+    # converter ids para int com segurança
+    campanha_id_int: int | None = None
+    doador_id_int: int | None = None
+
+    try:
+        if campanha_id not in (None, ""):
+            campanha_id_int = int(campanha_id)
+    except ValueError:
+        campanha_id_int = None
+
+    try:
+        if doador_id not in (None, ""):
+            doador_id_int = int(doador_id)
+    except ValueError:
+        doador_id_int = None
+
+    # Base da query
+    query = (
+        select(Doacao, Doador, Campanha)
+        .join(Doador, Doacao.id_doador == Doador.id)
+        .join(Campanha, Doacao.id_campanha == Campanha.id)
+    )
+
+    # Filtros opcionais (usando as versões int convertidas)
+    if campanha_id_int:
+        query = query.where(Doacao.id_campanha == campanha_id_int)
+
+    if doador_id_int:
+        query = query.where(Doacao.id_doador == doador_id_int)
+
+    if tipo:
+        query = query.where(Doacao.tipo_doacao == tipo)
+
+    if data:
+        from datetime import date
+        try:
+            data_formatada = date.fromisoformat(data)
+            query = query.where(Doacao.data_doacao == data_formatada)
+        except ValueError:
+            # data inválida -> ignora o filtro
+            pass
+
+    resultados = session.exec(query).all()
+
+    lista_doacoes = []
+    for doacao, doador, campanha in resultados:
+        lista_doacoes.append({
+            "nome_doador": doador.nome,
+            "campanha": campanha.titulo,
+            "data": doacao.data_doacao.strftime("%d/%m/%Y"),
+            "tipo": doacao.tipo_doacao,
+            "valor": doacao.valor,
+            "quantidade": doacao.quantidade,
+            "descricao": doacao.tipo_item,
+        })
+
+    # Para preencher os selects
+    campanhas = session.exec(select(Campanha)).all()
+    doadores = session.exec(select(Doador)).all()
+
+    return templates.TemplateResponse(
+        "historico.html",
+        {
+            "request": request,
+            "doacoes": lista_doacoes,
+            "campanhas": campanhas,
+            "doadores": doadores,
+        },
+    )

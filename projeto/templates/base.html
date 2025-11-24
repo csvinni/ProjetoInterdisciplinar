@@ -22,12 +22,6 @@
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
             <input type="text" placeholder="Pesquisar...">
         </div>
-    
-        <div class="user-profile">
-            <!-- Usando placeholder até você adicionar uma imagem real -->
-            <img src="https://via.placeholder.com/40" alt="User Profile Picture">
-            <span>Nome do Usuário</span>
-        </div>
     </header>
 
 
@@ -35,13 +29,13 @@
         <div id="sidebar_content">
             <div id="user">
                 <!-- Por favor, substitua por sua logo real ou use um placeholder -->
-                <img src="../static/assets/logo.png" id="user_avatar" alt="Avatar">
+                <a href="{{ url_for('dashboard') }}">
+                    <img src="../static/assets/logo.png" id="user_avatar" alt="Avatar">
+                </a>
     
-                <p id="user_infos">
                     <span class="item-description">
                         GDCB
                     </span>
-                </p>
             </div>
     
             <ul id="side_items">
@@ -83,10 +77,8 @@
                         <i class="fa-solid fa-chevron-down arrow"></i>
                     </i class="fa-solid fa-box"></i></a>
                     <ul class="submenu">
-                        <li><a href="#">Histórico de Usuários</a></li>
-                        <li><a href="#">Histórico de ONGs</a></li>
                         <!-- Linkando para a rota FastAPI que criamos -->
-                        <li><a href="{{ url_for('login') }}">Histórico de Doações</a></li>
+                        <li><a href="{{ url_for('historico_doacoes') }}">Histórico de Doações</a></li>
                     </ul>
                 </li>
             </ul>
