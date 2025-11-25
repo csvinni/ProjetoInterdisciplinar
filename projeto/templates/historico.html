@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}GDCB - Histórico de Doações{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static', path='historico.css') }}">
+{% endblock %}
+
+{% block content %}
+    <form method="get" class="filtros-container">
+        <div class="filtros-card">
+
+            <div class="filtro-item">
+                <label for="campanha">Campanha</label>
+                <select name="campanha_id" id="campanha">
+                    <option value="">Todas</option>
+                    {% for c in campanhas %}
+                    <option value="{{ c.id }}"
+                        {% if request.query_params.get('campanha_id', '') == (c.id|string) %}selected{% endif %}>
+                        {{ c.titulo }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filtro-item">
+                <label for="doador">Doador</label>
+                <select name="doador_id" id="doador">
+                    <option value="">Todos</option>
+                    {% for d in doadores %}
+                    <option value="{{ d.id }}"
+                        {% if request.query_params.get('doador_id', '') == (d.id|string) %}selected{% endif %}>
+                        {{ d.nome }}
+                    </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filtro-item">
+                <label for="tipo">Tipo de doação</label>
+                <select name="tipo" id="tipo">
+                    <option value="">Todos</option>
+                    <option value="dinheiro" {% if request.query_params.get('tipo','') == 'dinheiro' %}selected{% endif %}>Dinheiro</option>
+                    <option value="itens" {% if request.query_params.get('tipo','') == 'itens' %}selected{% endif %}>Itens</option>
+                </select>
+            </div>
+
+            <div class="filtro-item">
+                <label for="data">Data</label>
+                <input type="date" name="data" id="data"
+                    value="{{ request.query_params.get('data','') }}">
+            </div>
+
+            <button type="submit" class="btn-filtrar">Filtrar</button>
+        </div>
+    </form>
+
+
+    <div class="historico-wrapper">
+        <section class="historico-section">
+            <h2>Histórico</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome Doador</th>
+                            <th>Campanha</th>
+                            <th>Data doação</th>
+                            <th>Tipo doação</th>
+                            <th>Valor</th>
+                            <th>Quantidade de itens</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for doacao in doacoes %}
+                        <tr>
+                            <td>{{ doacao.nome_doador }}</td>
+                            <td>{{ doacao.campanha }}</td>
+                            <td>{{ doacao.data }}</td>
+                            <td>{{ doacao.tipo }}</td>
+                            <td>{{ doacao.valor if doacao.valor else "-" }}</td>
+                            <td>{{ doacao.quantidade if doacao.quantidade else "-" }}</td>
+                            <td>{{ doacao.descricao if doacao.descricao else "-" }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+
+                </table>
+            </div>
+        </section>
+    </div>
+{% endblock %}

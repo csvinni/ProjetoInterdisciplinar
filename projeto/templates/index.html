@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+<link rel="stylesheet" href="{{ url_for('static', path='index.css') }}">
+</head>
+<body>
+    <div>
+        <header>
+           <div class="logo">
+             <img src="../static/assets/logo.png" alt="Logo" class="logo-img" />
+             <span class="logo-text">Gerenciador de Doações e Campanhas Beneficente</span>
+         </div>
+         <div class="header-actions">
+             <a href="{{ url_for('cadastro') }}" class="register-btn">
+                <h3>Cadastre agora a sua ONG</h3>
+             </a>
+                 <div class="user-icon">
+                     <i class="fa-solid fa-user"></i>
+                 </div>
+         </div>
+         </header>
+         <section class="section1">
+             <div class="content-text">
+                 <h1 class="headline">EM UM MUNDO ONDE CADA GESTO CONTA, NÓS APRESENTAMOS O SEU PONTO DE ENCONTRO COM A <span class="highlight">SOLIDARIEDADE.</span></h1>
+                 <p class="description">Com segurança, transparência e facilidade, você pode apoiar as causas que mais te tocam e acompanhar o impacto real de sua generosidade.</p>
+                 <p class="intro">Aqui, transformamos a intenção em ação, conectando você a campanhas que mudam vidas. De pequenos projetos locais a grandes iniciativas humanitárias, cada doação, não importa o valor, é uma semente que plantamos juntos para colher um futuro mais justo e esperançoso.</p>
+                 <div class="scroll-indicator">
+                     <i class="fas fa-chevron-down arrow-down"></i>
+                     <i class="fas fa-chevron-down arrow-down"></i>
+                 </div>
+             </div>
+         </section>
+         <section class='section2'>
+             <div class="content-text2">
+                 <h1 class="headline2">JUNTE-SE A NÓS E FAÇA PARTE DE UMA REDE GLOBAL DE <span class="highlight2">SOLIDARIEDADE</span></h1>
+                 <p class="description2">Cada clique, cada compartilhamento, cada doação - juntos, estamos construindo um mundo onde a compaixão é a força que nos une.</p>
+                 <p class="intro2">Aqui, sua generosidade encontra um propósito maior. Ao apoiar nossas campanhas, você não está apenas ajudando a transformar vidas; você está se tornando parte de uma comunidade global dedicada a fazer a diferença. Com transparência e segurança, garantimos que cada contribuição seja um passo em direção a um futuro mais brilhante para todos.</p>
+             </div>
+         </section>
+     </div>
+     <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Seleciona o elemento do cabeçalho e da segunda seção
+            const header = document.querySelector('header');
+            const section2 = document.querySelector('.section2');
+
+            // Adiciona um "listener" para o evento de rolagem da janela
+            window.addEventListener('scroll', () => {
+                // Pega a posição vertical da janela (o quanto foi rolado)
+                const scrollPosition = window.scrollY;
+
+                // Pega a posição do topo da segunda seção em relação ao topo da página
+                const section2Top = section2.offsetTop;
+
+                // Verifica se a posição de rolagem é maior ou igual à posição da segunda seção
+                if (scrollPosition >= section2Top) {
+                    // Se sim, adiciona a classe 'scrolled' ao cabeçalho
+                    header.classList.add('scrolled');
+                } else {
+                    // Se não, remove a classe 'scrolled'
+                    header.classList.remove('scrolled');
+                }
+            });
+
+        });
+     </script>
+</body>
+</html>

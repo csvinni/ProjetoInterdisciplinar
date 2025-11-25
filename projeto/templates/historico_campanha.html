@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doações da Campanha</title>
+    <link rel="stylesheet" href="historico_campanha.css">
+</head>
+<body>
+    <div class="historico-wrapper">
+        <section class="historico-section">
+            <h2>Doações da Campanha: {{ nome_campanha or 'Nome da Campanha' }}</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Nome Doador</th>
+                            <th>Data doação</th>
+                            <th>Tipo doação</th>
+                            <th>Item Doado</th>
+                            <th>Valor</th>
+                            <th>Quantidade de itens</th>
+                            <th>Descrição</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for doacao in doacoes_campanha %}
+                        <tr>
+                            <td>{{ doacao.nome_doador }}</td>
+                            <td>{{ doacao.data_doacao }}</td>
+                            <td>{{ doacao.tipo_doacao }}</td>
+                            <td>{{ doacao.nome_item or '-' }}</td> 
+                            <td>{{ doacao.valor }}</td>
+                            <td>{{ doacao.quantidade_itens }}</td>
+                            <td>{{ doacao.descricao }}</td>
+                        </tr>
+                        {% else %}
+                        <tr>
+                            <td colspan="7" style="text-align: center;">Não há doações registradas para esta campanha.</td>
+                        </tr>
+                        {% endfor %}
+
+                        <tr>
+                            <td>João Silva</td>
+                            <td>01/11/2025</td>
+                            <td>valor</td>
+                            <td>-</td> <td>R$ 50,00</td>
+                            <td>-</td>
+                            <td>Doação em dinheiro.</td>
+                        </tr>
+                        <tr>
+                            <td>Maria Souza</td>
+                            <td>02/11/2025</td>
+                            <td>itens</td>
+                            <td>Roupas</td> <td>-</td>
+                            <td>5</td>
+                            <td>5 cobertores novos.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

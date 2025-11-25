@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- O título muda para cada página filha -->
+    <title>GDCB - Dashboard</title> 
+    <link rel="stylesheet" href="{{ url_for('static', path='/cadastro_doacoes.css') }}">
+</head>
+
+<body>
+  <div class="modal-container">
+    <div class="header">
+      <h2>Cadastro de Doação</h2>
+      <button class="close-button" aria-label="Fechar">&times;</button>
+    </div>
+
+    <form action="/doacoes/cadastro" method="post">
+
+      <!-- Seleção do doador -->
+      <div class="form-row">
+        <div class="form-field column-1">
+          <label for="id_doador">Doador:</label>
+          <select id="id_doador" name="id_doador" required>
+            <option value="">Selecione um doador</option>
+            {% for doador in doadores %}
+            <option value="{{ doador.id }}">{{ doador.nome }} — {{ doador.email }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Seleção da campanha -->
+      <div class="form-row">
+        <div class="form-field column-1">
+          <label for="id_campanha">Campanha:</label>
+          <select id="id_campanha" name="id_campanha" required>
+            <option value="">Selecione uma campanha</option>
+            {% for campanha in campanhas %}
+            <option value="{{ campanha.id }}">{{ campanha.titulo }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Tipo de doação -->
+      <div class="form-row">
+        <div class="form-field column-1">
+          <label for="tipo_doacao">Tipo de doação:</label>
+          <select id="tipo_doacao" name="tipo_doacao" required>
+            <option value="">Selecione um tipo</option>
+            <option value="dinheiro">Dinheiro (Financeira)</option>
+            <option value="itens">Itens (Material)</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Seção de doação em dinheiro -->
+      <div id="secao-dinheiro" class="secao-condicional" style="display: none;">
+        <div class="form-row">
+          <div class="form-field column-2">
+            <label for="valor">Valor da doação:</label>
+            <input type="number" id="valor" name="valor" step="0.01" placeholder="Ex: 50.00">
+          </div>
+          <div class="form-field column-2">
+            <label for="data_doacao_dinheiro">Data da doação:</label>
+            <input type="date" id="data_doacao_dinheiro" name="data_doacao_dinheiro">
+          </div>
+        </div>
+      </div>
+
+      <!-- Seção de doação em itens -->
+      <div id="secao-itens" class="secao-condicional" style="display: none;">
+        <div class="form-row">
+          <div class="form-field column-2">
+            <label for="tipo_item">Tipo de item:</label>
+            <input type="text" id="tipo_item" name="tipo_item" placeholder="Ex: Alimentos">
+          </div>
+          <div class="form-field column-2">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" id="quantidade" name="quantidade" placeholder="Ex: 10">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-field column-1">
+            <label for="data_doacao_itens">Data da doação:</label>
+            <input type="date" id="data_doacao_itens" name="data_doacao_itens">
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="submit-button">Cadastrar</button>
+    </form>
+  </div>
+
+</body>
+

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- O título muda para cada página filha -->
+    <title>{% block title %}GDCB - Dashboard{% endblock %}</title> 
+    
+    <!-- CSS padrão e Font Awesome (sempre carregados) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" xintegrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/base.css') }}">
+    <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    
+    <!-- ESTE É O BLOCO CHAVE QUE FALTAVA! -->
+    <!-- Ele permite que as páginas filhas injetem CSS ou META tags específicas. -->
+    {% block head %}{% endblock %}
+
+</head>
+<body>
+    <header class="top-header">
+        <div class="search-bar">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" placeholder="Pesquisar...">
+        </div>
+    </header>
+
+
+    <nav id="sidebar">
+        <div id="sidebar_content">
+            <div id="user">
+                <!-- Por favor, substitua por sua logo real ou use um placeholder -->
+                <a href="{{ url_for('dashboard') }}">
+                    <img src="../static/assets/logo.png" id="user_avatar" alt="Avatar">
+                </a>
+    
+                    <span class="item-description">
+                        GDCB
+                    </span>
+            </div>
+    
+            <ul id="side_items">
+                <li class="side-item active">
+                    <a href="{{ url_for('dashboard') }}">
+                        <i class="fa-solid fa-chart-line"></i>
+                        <span class="item-description">Dashboard</span>
+                    </a>
+                </li>
+
+                <li class="side-item has-submenu">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fa-solid fa-user"></i>
+                        <span class="item-description">Cadastro</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#" id="openDoacaoModal">Doação</a></li>
+                        <li><a href="#" id="openDoadorModal">Doador</a></li>
+                    </ul>
+                </li>
+
+                <li class="side-item has-submenu">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fa-solid fa-bell"></i>
+                        <span class="item-description">Doações</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </a>
+                    <ul class="submenu">
+                        <li><a href="#">Listar</a></li>
+                        <li><a href="#">Últimas doações</a></li>
+                    </ul>
+                </li>
+
+                <li class="side-item has-submenu">
+                    <a href="#" class="submenu-toggle">
+                        <i class="fa-solid fa-box"></i>
+                        <span class="item-description">Histórico</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </i class="fa-solid fa-box"></i></a>
+                    <ul class="submenu">
+                        <!-- Linkando para a rota FastAPI que criamos -->
+                        <li><a href="{{ url_for('historico_doacoes') }}">Histórico de Doações</a></li>
+                    </ul>
+                </li>
+            </ul>
+    
+            <button id="open_btn">
+                <i id="open_btn_icon" class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+      <div id="logout">
+            <a href="{{ url_for('logout') }}">
+                <button id="logout_btn">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span class="item-description">
+                        Logout
+                    </span>
+                </button>
+            </a>  <!-- FECHOU A TAG A -->
+        </div>
+    </nav>
+
+    <main>
+        <!-- CONTEÚDO ÚNICO DA PÁGINA FILHA VEM AQUI -->
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- Script JS da base (será criado a seguir) -->
+   <script src="{{ url_for('static', path='/javaScript/base.js') }}"></script>
+    
+   {% block scripts %}
+   <!-- 🔸 MODAL GLOBAL PARA FORMULÁRIOS -->
+   <div id="modalOverlay" class="modal-overlay" style="display: none;">
+       <div id="modalContent" class="modal-content"></div>
+   </div>
+   
+   <script>
+   document.addEventListener("DOMContentLoaded", () => {
+   
+       const modalOverlay = document.getElementById("modalOverlay");
+       const modalContent = document.getElementById("modalContent");
+   
+       // 🔹 Botões de abrir modal
+       const openDoadorBtn = document.getElementById("openDoadorModal");
+       const openDoacaoBtn = document.getElementById("openDoacaoModal");
+   
+       // -------- Função PARA CARREGAR JS DINÂMICO --------
+       async function loadScript(src) {
+           return new Promise((resolve, reject) => {
+               // remove scripts anteriores (se houver)
+               const old = document.querySelector("script[data-modal-script]");
+               if (old) old.remove();
+   
+               const s = document.createElement("script");
+               s.src = src;
+               s.dataset.modalScript = "true";
+               s.onload = resolve;
+               s.onerror = reject;
+   
+               document.body.appendChild(s);
+           });
+       }
+   
+       // -------------- MODAL DOADOR -------------------
+       if (openDoadorBtn) {
+           openDoadorBtn.addEventListener("click", async (e) => {
+               e.preventDefault();
+               
+               const html = await (await fetch("/doadores/cadastro")).text();
+               modalContent.innerHTML = html;
+               modalOverlay.style.display = "flex";
+           });
+       }
+   
+       // -------------- MODAL DOAÇÃO -------------------
+       if (openDoacaoBtn) {
+           openDoacaoBtn.addEventListener("click", async (e) => {
+               e.preventDefault();
+   
+               const response = await fetch("/doacoes/cadastro");
+               const html = await response.text();
+   
+               modalContent.innerHTML = html;
+               modalOverlay.style.display = "flex";
+   
+               // carregar JS do formulário
+               await loadScript("{{ url_for('static', path='/javaScript/doacoes.js') }}");
+   
+               // 🔹 inicializa a funcionalidade do formulário (ex: mostrar/ocultar seções)
+               if (typeof initDoacoesForm === "function") {
+                   initDoacoesForm();
+               }
+   
+               console.log("doacoes.js carregado e inicializado!");
+           });
+       }
+   
+       // -------------- FECHAR MODAL --------------------
+       modalOverlay.addEventListener("click", (e) => {
+           if (e.target.id === "modalOverlay") {
+               modalOverlay.style.display = "none";
+           }
+       });
+   
+       document.addEventListener("click", (e) => {
+           if (e.target.classList.contains("close-button")) {
+               modalOverlay.style.display = "none";
+           }
+       });
+   
+   });
+   </script>
+
+    {% endblock %}
+
+</body>
+</html>

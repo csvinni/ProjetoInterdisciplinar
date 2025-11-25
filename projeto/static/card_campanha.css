@@ -1,0 +1,185 @@
+/* === BOTÃO + NO TOPO === */
+.top-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 25px;
+    margin-bottom: 20px;
+}
+
+.btn-add {
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #4a7df2;
+    color: #fff;
+
+    border: none;
+    border-radius: 50%;
+    font-size: 28px;
+    font-weight: 700;
+    cursor: pointer;
+
+    transition: transform .2s ease, background .2s ease;
+    box-shadow: 0px 4px 14px rgba(0,0,0,0.15);
+}
+
+.btn-add:hover {
+    background-color: #3a69d2;
+    transform: translateY(-3px);
+}
+
+/* === GRID DOS CARDS === */
+.cards-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 22px;
+    padding: 25px;
+}
+
+/* === CARD === */
+.card-campanha {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 22px;
+    display: flex;
+    flex-direction: column;
+    min-height: 330px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+    transition: transform .15s ease, box-shadow .2s ease;
+}
+
+.card-campanha:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.10);
+}
+
+/* === HEADER === */
+.card-header {
+    border-left: 5px solid #E8B047;
+    padding-left: 12px;
+    margin-bottom: 20px;
+}
+
+.campanha-titulo {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    color: #2c2c2c;
+}
+
+.campanha-descricao {
+    font-size: 14px;
+    color: #6d6d6d;
+    margin-top: 4px;
+}
+
+/* === CORPO DO CARD === */
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.info-item {
+    margin-bottom: 6px;
+}
+
+.label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+}
+
+.valor,
+.valor-data {
+    font-size: 15px;
+    font-weight: 700;
+    color: #2c2c2c;
+}
+
+/* === STATUS === */
+.status-row {
+    margin-top: 12px;
+    padding-top: 14px;
+    border-top: 1px solid #eee;
+}
+
+.status-display {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 6px;
+}
+
+.status-indicator {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+}
+
+.status-indicator.ativa {
+    background: #4CAF50;
+}
+
+.status-indicator.concluida {
+    background: #E04747;
+}
+
+.status-texto {
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* === RODAPÉ === */
+.card-footer {
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+/* === BOTÕES === */
+.btn {
+    padding: 10px 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease, transform .15s ease;
+}
+
+/* hover suave */
+.btn:hover {
+    transform: translateY(-2px);
+}
+
+/* excluir */
+.btn-excluir {
+    background: #ff6b6b;
+    color: #fff;
+}
+.btn-excluir:hover {
+    background: #e45858;
+}
+
+/* editar */
+.btn-editar {
+    background: #7e57c2;
+    color: #fff;
+}
+.btn-editar:hover {
+    background: #6b48ac;
+}
+
+/* visualizar */
+.btn-visualizar {
+    background: #e8b047;
+    color: #333;
+}
+.btn-visualizar:hover {
+    background: #d9a23d;
+}
