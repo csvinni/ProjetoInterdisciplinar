@@ -1,129 +1,168 @@
-/* Container principal que dará o fundo branco à tabela */
-body {
-    font-family: sans-serif;
-}
+/*
+ * CSS PROFISSIONAL FINAL: Tela de Histórico de Doações - Paleta Coesa (Azul e Cinza).
+ */
 
-.historico-wrapper {
-    background-color: white;
-    padding: 30px;
-    margin: 40px auto;
-    max-width: 900px;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(212, 71, 71, 0.1);
-}
+ @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-/* --- Estilização da seção de Histórico e Tabela --- */
-.historico-section {
-    padding: 0;
-}
-
-/* Estilização do título H2 com as barrinhas laterais */
-.historico-section h2 {
-    color: #8e44ad;
-    font-size: 24px;
-    margin-bottom: 20px;
-    
-    /* Configura o h2 como um contêiner Flexbox */
-    display: flex;
-    align-items: center; /* Alinha os itens verticalmente */
-    justify-content: center; /* Centraliza o texto "Histórico" */
-    gap: 15px; /* Espaçamento entre o título e as barras */
-}
-
-/* Cria a barrinha esquerda usando um pseudoelemento */
-.historico-section h2::before {
-    content: '';
-    height: 24px; /* Altura da barrinha, igual à altura do texto */
-    width: 5px; /* Largura da barrinha */
-    background-color: #8e44ad;
-}
-
-/* Cria a barrinha direita usando um pseudoelemento */
-.historico-section h2::after {
-    content: '';
-    height: 24px; /* Altura da barrinha */
-    width: 5px; /* Largura da barrinha */
-    background-color: #8e44ad;
-}
-
-/* --- Estilização da tabela --- */
-.table-container {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-table th, table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-table th {
-    background-color: #8e44ad;
-    font-weight: bold;
-    color: #ffffff;
-}
-
-table tr:last-child td {
-    border-bottom: none;
-}
-
-/* ----------- FILTROS ----------- */
-
-.filtros-container {
-    max-width: 900px;
-    margin: 20px auto 30px auto;
-}
-
-.filtros-card {
-    background: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-}
-
-.filtro-item {
-    display: flex;
-    flex-direction: column;
-    font-size: 14px;
-}
-
-.filtro-item label {
-    margin-bottom: 6px;
-    color: #333;
-    font-weight: bold;
-}
-
-.filtro-item select,
-.filtro-item input {
-    padding: 10px;
-    border-radius: 6px;
-    border: 1px solid #ccc;
-    background: #fafafa;
-}
-
-.btn-filtrar {
-    grid-column: span 4;
-    background: #8e44ad;
-    color: white;
-    padding: 12px;
-    border: none;
-    border-radius: 6px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-filtrar:hover {
-    background: #3168ff;
-}
+ * {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+     font-family: 'Roboto', sans-serif;
+ }
+ 
+ /* --- Container Principal (Card da Tabela e Título) --- */
+ .historico-wrapper {
+     background-color: white;
+     padding: 30px;
+     margin: 40px auto;
+     max-width: 1200px;
+     border-radius: 12px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+ }
+ 
+ /* --- Estilização da seção de Histórico e Tabela --- */
+ .historico-section {
+     padding: 0;
+ }
+ 
+ /* Estilização do título H2 (AGORA CINZA) */
+ .historico-section h2 {
+     color: #34495e; /* Cinza escuro profissional (como o título do login/cadastro) */
+     font-size: 32px;
+     font-weight: 500;
+     margin-bottom: 30px;
+     
+     display: flex;
+     align-items: center; 
+     justify-content: flex-start;
+     gap: 15px;
+ }
+ 
+ /* Barrinha vertical (AGORA AZUL PROFUNDO) */
+ .historico-section h2::before {
+     content: '';
+     height: 32px; 
+     width: 5px; 
+     background-color: #1c52a8; /* Azul Profundo (Novo destaque) */
+ }
+ 
+ /* Esconder a barrinha da direita */
+ .historico-section h2::after {
+     content: none;
+ }
+ 
+ /* --- Tabela --- */
+ .table-container {
+     background-color: white;
+     border-radius: 8px;
+     overflow-x: auto;
+     border: 1px solid #f0f2f5;
+ }
+ 
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     min-width: 900px;
+ }
+ 
+ /* Cabeçalho da Tabela (AZUL PRINCIPAL) */
+ table th {
+     background-color: #4a7df2;
+     font-weight: 600;
+     color: #ffffff;
+     padding: 18px 15px; 
+     text-align: left;
+     font-size: 15px;
+ }
+ 
+ table td {
+     padding: 15px;
+     text-align: left;
+     border-bottom: 1px solid #f0f2f5; 
+     color: #555;
+     font-size: 15px;
+ }
+ 
+ /* Linhas alternadas (Zebra) */
+ table tbody tr:nth-child(even) {
+     background-color: #f7f9fc; 
+ }
+ 
+ /* Efeito hover sutil */
+ table tbody tr:hover {
+     background-color: #f0f2f5; 
+ }
+ 
+ table tr:last-child td {
+     border-bottom: none;
+ }
+ 
+ 
+ /* ----------- FILTROS PROFISSIONAIS ----------- */
+ 
+ .filtros-container {
+     max-width: 1200px;
+     margin: 20px auto 30px auto;
+ }
+ 
+ .filtros-card {
+     background: #fcfcfc;
+     padding: 25px;
+     border-radius: 12px;
+     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+ 
+     display: grid;
+     grid-template-columns: repeat(5, 1fr); 
+     gap: 20px;
+     align-items: flex-end;
+ }
+ 
+ .filtro-item {
+     display: flex;
+     flex-direction: column;
+ }
+ 
+ .filtro-item label {
+     margin-bottom: 8px;
+     color: #34495e;
+     font-weight: 500;
+     font-size: 14px;
+ }
+ 
+ .filtro-item select,
+ .filtro-item input {
+     padding: 10px 12px;
+     border-radius: 8px; 
+     border: 1px solid #dfe6e9; 
+     background: white; 
+     font-size: 15px;
+     transition: 0.3s;
+ }
+ 
+ /* Foco dos Inputs (AGORA AZUL PROFUNDO) */
+ .filtro-item select:focus,
+ .filtro-item input:focus {
+     border-color: #1c52a8;
+     box-shadow: 0 0 0 3px rgba(28, 82, 168, 0.15); 
+     outline: none;
+ }
+ 
+ /* Botão de Filtrar (AGORA AZUL PROFUNDO) */
+ .btn-filtrar {
+     grid-column: span 1; 
+     background: #E04747; /* Azul Profundo */
+     color: white;
+     padding: 10px;
+     border: none;
+     border-radius: 8px; 
+     font-weight: 600;
+     cursor: pointer;
+     transition: 0.2s;
+     height: 40px; 
+ }
+ 
+ /* Hover do Botão (AZUL AINDA MAIS ESCURO) */
+ .btn-filtrar:hover {
+     background: #ff4545;
+ }

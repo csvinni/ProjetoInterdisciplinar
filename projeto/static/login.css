@@ -1,149 +1,175 @@
-* {
+/*
+ * CSS LOGIN: Estilo "Dois Painéis Modernos" - FORMULÁRIO À DIREITA.
+ * Cores e Estilos Espelhando a tela de Cadastro.
+ */
+
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif; /* Usando Roboto como no cadastro */
 }
 
 body {
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #f0f2f5;
+    /* Centraliza o container principal na tela */
+    justify-content: center; 
+    align-items: center; 
+    /* Cor de fundo Azul Sóbrio (igual ao cadastro) */
+    background-color: #4a7df2; 
 }
 
+/* --- Header Bar (Escondido para este layout de tela cheia/focado) --- */
 .header-bar {
-    height: 120px;
-    width: 100%;
-    background-color: white;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
+    display: none; 
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    color: #333;
-}
 
-.logo-img {
-    height: 80px;
-    width: 80px;
-    margin-right: 15px;
-}
-
-.logo-text {
-    line-height: 1.2;
-    font-size: 16px;
-}
-
+/* --- Container Principal (O Grande Card Arredondado) --- */
 .login-container {
     display: flex;
-    width: 100%;
-    flex: 1;
+    width: 90%; 
+    max-width: 1100px; 
+    height: 90%;
+    max-height: 700px; 
     overflow: hidden;
+    background-color: white; 
+    /* Cantos Super Arredondados */
+    border-radius: 30px; 
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1); 
 }
 
+/* --- Painel de Imagem (Lado Esquerdo) --- */
 .side-image {
-    flex: 1;
-    background-image: url('../static/assets/image.png'); 
+    /* Dar mais espaço para a imagem/ilustração */
+    flex: 1.2; 
+    min-width: 40%;
+    /* Use a imagem da ONG ou uma imagem inspiradora */
+    background-image: url('../static/assets/foto_cad_log.jpg'); 
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
+/* --- Painel do Formulário (Lado Direito) --- */
 .login-form-container {
     flex: 1;
-    background-color: #1c52a8;
+    min-width: 60%;
+    background-color: white; 
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 20px;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza HORIZONTALMENTE */
+    padding: 60px; 
 }
 
 
-
+/* --- Card de Login (Conteúdo do formulário) --- */
 .login-card {
-    background-color: #f2f2f2;
-    padding: 40px;
-    border-radius: 10px;
+    background-color: transparent; 
+    padding: 0; 
     width: 100%;
-    max-width: 400px;
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 2;
+    max-width: 400px; 
+    text-align: left; /* Garante que os inputs alinhem à esquerda */
+    box-shadow: none; 
 }
 
+/* Título Refinado (Espelhado do cadastro) */
 .login-card h2 {
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
+    font-size: 36px; 
+    color: #34495e; 
+    margin-bottom: 5px; /* Reduz o espaço */
+    font-weight: 500; 
+    text-transform: uppercase; /* Mantendo o padrão do seu HTML original */
+    letter-spacing: 2px;
+    padding-bottom: 0;
+    border-bottom: none;
+    text-align: center; /* Centraliza o H2 no card */
 }
 
-.login-card h2::before,
-.login-card h2::after {
-    content: '';
-    height: 32px; /* Altura igual à fonte para centralizar verticalmente */
-    width: 5px; /* Largura da barra vertical */
-    background-color: #e67e22;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
+/* Subtítulo de instrução */
+.instruction-text {
+    font-size: 16px;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-.login-card h2::before {
-    left: -15px; /* Posição à esquerda do texto */
-}
-
-.login-card h2::after {
-    right: -15px; /* Posição à direita do texto */
-}
-
+/* --- Input Groups e Labels (Espelhado do cadastro) --- */
 .input-group {
-    margin-bottom: 20px;
+    margin-top: 25px; 
+    margin-bottom: 5px; 
     text-align: left;
 }
 
 .input-group label {
-    display: block;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 5px;
+    display: block; 
+    font-weight: 500; 
+    color: #34495e; 
+    margin-bottom: 8px; 
+    font-size: 15px; 
 }
 
+/* --- Campos de Input (Estilizado) --- */
 .input-group input {
     width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #e8e8e8;
+    padding: 14px 15px; 
+    border: 1px solid #dfe6e9; 
+    border-radius: 8px; 
+    background-color: #fcfcfc; 
     color: #333;
     font-size: 16px;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; 
 }
 
+.input-group input:focus {
+    border-color: #e67e22; 
+    box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.1); 
+    background-color: #fff9f5; 
+    outline: none;
+}
+
+
+/* --- Botão de Login (Call to Action) --- */
 .login-button {
     width: 100%;
-    padding: 15px;
-    background-color: #f39c12;
+    padding: 18px; 
+    background-color: #e67e22; /* Laranja de Destaque */
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
+    border-radius: 8px;
+    font-size: 17px; 
+    font-weight: 700; 
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 8px 15px rgba(230, 126, 34, 0.3); 
+    margin-top: 40px; /* Espaço amplo antes do botão */
 }
 
 .login-button:hover {
-    background-color: #e67e22;
+    background-color: #d35400; 
+    transform: translateY(-1px); 
+    box-shadow: 0 6px 15px rgba(230, 126, 34, 0.4);
+}
+
+/* --- Link "Não tem conta? Cadastre-se" --- */
+.signup-text {
+    text-align:center; 
+    margin-top:30px; 
+    padding-bottom: 10px;
+    font-size: 14px;
+    color: #555;
+}
+
+.signup-text a {
+    color: #e67e22; 
+    text-decoration: none; 
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.signup-text a:hover {
+    color: #d35400; 
+    text-decoration: underline;
 }

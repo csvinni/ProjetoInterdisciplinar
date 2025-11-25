@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro - GDCB</title>
     <link rel="stylesheet" href="/static/cadastro.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -19,44 +20,45 @@
     </div>
 
     <div class="login-container">
-        <div class="side-image"></div>
         <div class="login-form-container">
             <div class="login-card">
                 <h2>CADASTRO</h2>
-
+    
                 {% if error %}
                 <p style="color: red; text-align: center;">{{ error }}</p>
                 {% endif %}
-
+    
                 <form method="post" action="/auth/cadastro">
+    
                     <div class="input-group">
                         <label for="ong">Nome da ONG:</label>
                         <input type="text" id="ong" name="ong" required>
                     </div>
-
+                
                     <div class="input-group">
                         <label for="nome">Nome do responsável:</label>
                         <input type="text" id="nome" name="nome" required>
                     </div>
-
+                
                     <div class="input-group">
                         <label for="email">E-mail:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
-
+                
                     <div class="input-group">
                         <label for="senha">Senha:</label>
                         <input type="password" id="senha" name="senha" required>
                     </div>
-
+                
                     <button type="submit" class="login-button">Cadastrar ONG</button>
                 </form>
                 <p style="text-align:center; margin-top:10px;">
                     Já tem conta? <a href="{{ url_for('login_page') }}">Entrar</a>
                 </p>
             </div>
-            
         </div>
+        
+        <div class="side-image"></div>
     </div>
 </body>
 </html>

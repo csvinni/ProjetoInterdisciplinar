@@ -1,152 +1,175 @@
+/*
+ * CSS FINAL PROFISSIONAL: Estilo "Dois Painéis Modernos" com Fundo Azul e Refinamentos.
+ * Layout: Formulário à esquerda, Imagem à direita.
+ */
 
-* {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: 'Roboto', sans-serif; 
 }
 
 body {
     height: 100vh;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #f0f2f5;
+    /* Centraliza o container principal na tela */
+    justify-content: center; 
+    align-items: center; 
+    /* Cor de fundo Azul Sóbrio */
+    background-color: #4a7df2; 
 }
 
+/* --- Header Bar (Escondido) --- */
 .header-bar {
-    height: 120px;
-    width: 100%;
-    background-color: white;
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    align-items: center;
+    display: none; 
 }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    color: #333;
-}
 
-.logo-img {
-    height: 80px;
-    width: 80px;
-    margin-right: 15px;
-}
-
-.logo-text {
-    line-height: 1.2;
-    font-size: 16px;
-}
-
+/* --- Container Principal (O Grande Card Arredondado) --- */
 .login-container {
     display: flex;
-    width: 100%;
-    flex: 1;
+    width: 90%; 
+    max-width: 1100px; /* Largura ideal */
+    height: 90%;
+    max-height: 700px; /* Altura ideal */
     overflow: hidden;
+    background-color: white; 
+    /* Cantos Super Arredondados */
+    border-radius: 30px; 
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1); /* Sombra elegante */
 }
 
+/* --- Painel de Imagem (Lado Direito - Pela ordem do HTML) --- */
 .side-image {
-    flex: 1;
-    background-image: url('../static/assets/image.png'); 
+    flex: 1.2; 
+    min-width: 40%;
+    background-image: url('../static/assets/foto_cad_log.jpg'); 
     background-size: cover;
     background-position: center;
     position: relative;
 }
 
+/* --- Painel do Formulário (Lado Esquerdo - Pela ordem do HTML) --- */
 .login-form-container {
     flex: 1;
-    background-color: #1c52a8;
+    min-width: 60%;
+    background-color: white; 
     display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    padding: 20px;
+    flex-direction: column;
+    justify-content: center; /* Centraliza verticalmente */
+    align-items: center; /* Centraliza HORIZONTALMENTE */
+    padding: 60px; /* Espaçamento interno generoso */
 }
 
 
-
+/* --- Card de Cadastro (Conteúdo do formulário) --- */
 .login-card {
-    background-color: #f2f2f2;
-    padding: 40px;
-    border-radius: 10px;
+    background-color: transparent; 
+    padding: 0; 
     width: 100%;
-    max-width: 450px; /* Aumentado para acomodar mais campos */
-    text-align: center;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    z-index: 2;
+    max-width: 400px; 
+    text-align: left; /* Garante que os inputs alinhem à esquerda */
+    box-shadow: none; 
 }
 
-.login-card h2 {
-    font-size: 32px;
-    color: #333;
-    margin-bottom: 30px;
-    position: relative;
-    display: inline-block;
+/* Título Refinado */
+.login-form-container h2 {
+    font-size: 36px; /* Ajuste sutil de tamanho */
+    color: #34495e; /* Cinza escuro suave e profissional */
+    margin-bottom: 25px; /* Espaçamento refinado */
+    font-weight: 500; /* Peso médio para mais elegância */
+    text-transform: none; 
+    letter-spacing: normal;
+    padding-bottom: 0;
+    border-bottom: none;
 }
 
-.login-card h2::before,
-.login-card h2::after {
-    content: '';
-    height: 32px;
-    width: 5px;
-    background-color: #e67e22;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.login-card h2::before {
-    left: -15px;
-}
-
-.login-card h2::after {
-    right: -15px;
-}
-
+/* --- Grupo de Input e Labels (Visual Clean) --- */
+/* --- Grupo de Input e Labels (Visual Clean) --- */
 .input-group {
-    margin-bottom: 20px;
+    margin-top: 25px; /* Espaço entre os campos */
+    margin-bottom: 5px; 
     text-align: left;
 }
 
+/* NOVO: Estilizando o Label para ser visível e profissional */
 .input-group label {
-    display: block;
-    font-weight: bold;
-    color: #555;
-    margin-bottom: 5px;
+    display: block; /* Garante que ocupe a linha toda */
+    font-weight: 500; /* Peso médio */
+    color: #34495e; /* Cor profissional */
+    margin-bottom: 8px; /* Espaço entre o label e o input */
+    font-size: 15px; /* Tamanho de fonte legível */
 }
 
+/* Campos de Input (Sem mudanças) */
+/* ... (Mantenha o resto do código .input-group input intacto) ... */
+
+/* --- Campos de Input (Borda e Fundo Mais Clean) --- */
 .input-group input,
 .input-group textarea {
     width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 5px;
-    background-color: #e8e8e8;
+    padding: 14px 15px; 
+    border: 1px solid #dfe6e9; 
+    border-radius: 8px; 
+    background-color: #fcfcfc; 
     color: #333;
     font-size: 16px;
-    resize: vertical; /* Permite redimensionar apenas verticalmente o textarea */
+    /* Transição profissional */
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s; 
 }
 
+/* Efeito de Foco Refinado */
+.input-group input:focus,
+.input-group textarea:focus {
+    border-color: #e67e22; /* Laranja da ONG no foco */
+    /* Sombra sutil e controlada */
+    box-shadow: 0 0 0 4px rgba(230, 126, 34, 0.1); 
+    background-color: #fff9f5; /* Fundo ligeiramente alterado no foco */
+    outline: none;
+}
+
+
+/* --- Botão de Cadastro (Call to Action) --- */
 .login-button {
     width: 100%;
-    padding: 15px;
-    background-color: #f39c12;
+    padding: 18px; /* Ligeiramente mais alto */
+    background-color: #e67e22; /* Laranja de Destaque */
     color: white;
     border: none;
-    border-radius: 5px;
-    font-size: 18px;
-    font-weight: bold;
+    border-radius: 8px;
+    font-size: 17px; /* Ligeiramente menor para controle */
+    font-weight: 700; 
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: background-color 0.3s, transform 0.1s;
+    box-shadow: 0 8px 15px rgba(230, 126, 34, 0.3); 
+    margin-top: 35px; /* Espaço refinado */
 }
 
 .login-button:hover {
-    background-color: #e67e22;
+    background-color: #d35400; 
+    transform: translateY(-1px); 
+    /* Sombra de hover mais sutil */
+    box-shadow: 0 6px 15px rgba(230, 126, 34, 0.4);
+}
+
+/* --- Link "Já tem conta?" --- */
+.login-card p {
+    text-align:center; 
+    margin-top:30px; /* Mais espaço para separar do botão */
+    padding-bottom: 10px; /* Espaçamento inferior */
+    font-size: 14px;
+    color: #555;
+}
+
+.login-card p a {
+    color: #e67e22; /* Laranja */
+    text-decoration: none; 
+    font-weight: 600;
+    transition: color 0.2s;
+}
+
+.login-card p a:hover {
+    color: #d35400; 
+    text-decoration: underline;
 }

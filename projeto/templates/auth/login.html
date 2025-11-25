@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - GDCB</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="../static/login.css">
 </head>
 <body>
@@ -19,11 +20,17 @@
     </div>
 
     <div class="login-container">
+        
         <div class="side-image">
-            </div>
+        </div>
+        
         <div class="login-form-container">
             <div class="login-card">
+                
                 <h2>LOGIN</h2>
+                
+                <p class="instruction-text">Acesse sua conta para gerenciar campanhas.</p> 
+
                 <form action="/auth/login" method="post">
                     <div class="input-group">
                         <label for="email">E-mail:</label>
@@ -33,10 +40,14 @@
                         <label for="senha">Senha:</label>
                         <input type="password" id="senha" name="senha" required>
                     </div>
+                    
                     <button type="submit" class="login-button">ENTRAR</button>
-                </form>                
+                </form> 
+                
+                <p class="signup-text">
+                    Não tem uma conta? <a href="{{ url_for('cadastro_page') }}">Cadastre-se</a>
+                </p>
             </div>
-        
         </div>
     </div>
 </body>
