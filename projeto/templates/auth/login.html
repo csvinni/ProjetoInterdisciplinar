@@ -21,14 +21,12 @@
 
     <div class="login-container">
         
-        <div class="side-image">
-        </div>
+        <div class="side-image"></div>
         
         <div class="login-form-container">
             <div class="login-card">
                 
                 <h2>LOGIN</h2>
-                
                 <p class="instruction-text">Acesse sua conta para gerenciar campanhas.</p> 
 
                 <form action="/auth/login" method="post">
@@ -36,6 +34,7 @@
                         <label for="email">E-mail:</label>
                         <input type="email" id="email" name="email" required>
                     </div>
+
                     <div class="input-group">
                         <label for="senha">Senha:</label>
                         <input type="password" id="senha" name="senha" required>
@@ -50,5 +49,33 @@
             </div>
         </div>
     </div>
+
+    <!-- MODAL DE ERRO -->
+    <div id="errorModal" class="modal-overlay" style="display: none;">
+        <div class="modal-box">
+            <h3>Erro ao entrar</h3>
+            <p>Email ou senha incorretos.</p>
+
+            <button id="closeErrorModal" class="modal-btn">Tentar novamente</button>
+        </div>
+    </div>
+
+    <!-- SCRIPT DO MODAL -->
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const modal = document.getElementById("errorModal");
+        const closeBtn = document.getElementById("closeErrorModal");
+    
+        {% if error %}
+            modal.style.display = "flex";
+        {% endif %}
+    
+        closeBtn.addEventListener("click", () => {
+            modal.style.display = "none";
+            window.location.href = "/auth/login";
+        });
+    });
+    </script>
+    
 </body>
 </html>

@@ -96,14 +96,30 @@ def deletar_campanha_via_post(campanha_id: int, session: Session = Depends(get_s
     return RedirectResponse(url="/campanhas/", status_code=303)
 
 @router.get("/", response_class=HTMLResponse)
-def listar_campanhas(request: Request, session: Session = Depends(get_session)):
-    # 1. Busca todas as campanhas no banco de dados
-    campanhas = session.exec(select(Campanha)).all()
-    
-    # 2. Renderiza o template de listagem (assumindo que o template é 'lista_campanhas.html' ou algo similar)
+def listar_campanhas(
+    request: Request, 
+    search: str | None = None,
+    session: Session = Depends(get_session)
+):
+    query = select(Campanha)
+
+    # Se houver termo de busca, filtra
+    if search:
+        search_term = f"%{search}%"
+        query = query.where(
+            (Campanha.titulo.ilike(search_term)) |
+            (Campanha.descricao.ilike(search_term))
+        )
+
+    campanhas = session.exec(query).all()
+
     return templates.TemplateResponse(
-        "card_campanha.html", 
-        {"request": request, "campanhas": campanhas}
+        "card_campanha.html",
+        {
+            "request": request,
+            "campanhas": campanhas,
+            "search": search  # opcional para mostrar no template
+        }
     )
 
 
