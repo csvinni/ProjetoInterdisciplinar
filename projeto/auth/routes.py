@@ -67,3 +67,38 @@ def logout(request: Request):
     request.session.clear()  # 🧹 Limpa os dados da sessão
     return RedirectResponse(url="/auth/login", status_code=HTTP_302_FOUND)
 
+@router.get("/perfil", response_class=HTMLResponse)
+def perfil_page(request: Request, user=Depends(get_current_user)):
+    return templates.TemplateResponse("auth/perfil.html", {"request": request, "user": user})
+
+
+@router.post("/perfil")
+def atualizar_perfil(
+    request: Request,
+    nome: str = Form(...),
+    email: str = Form(...),
+    senha: str = Form(None),
+    session: Session = Depends(get_session)
+):
+    user_data = request.session.get("user")
+    user = session.get(Admin, user_data["id"])
+
+    if not user:
+        raise HTTPException(status_code=404, detail="Usuário não encontrado")
+
+    user.nome = nome
+    user.email = email
+
+    if senha and senha.strip():
+        user.set_password(senha)
+
+    session.add(user)
+    session.commit()
+    session.refresh(user)
+
+    # Atualiza sessão
+    request.session["user"] = {"id": user.id, "email": user.email, "nome": user.nome}
+
+    return RedirectResponse("/dashboard", status_code=302)
+
+

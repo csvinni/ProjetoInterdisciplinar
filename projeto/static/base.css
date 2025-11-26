@@ -268,22 +268,16 @@ body {
 }
 
 /* Perfil do usuário */
-.user-profile {
-    display: flex;
-    align-items: center;
-    gap: 10px;
+/* Para o ícone no Top Header */
+.profile-icon i {
+    font-size: 36px; /* Tamanho do ícone. Aumente ou diminua aqui! */
+    color: #555; /* Cor padrão */
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
-.user-profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.user-profile span {
-    font-weight: 500;
-    color: #333;
+.profile-icon i:hover {
+    color: #3168ff; /* Cor no hover */
 }
 
 /* ---------------------------------------------------- */
@@ -333,4 +327,138 @@ main {
     max-width: 600px;
     overflow-y: auto;
     max-height: 90vh;
+}
+
+/* ================================================= */
+/* 💖 ESTILOS BABADEIROS PARA O MODAL DE PERFIL 💖 */
+/* ================================================= */
+
+/* 1. Modal Container Específico */
+.profile-modal {
+    /* Fundo branco e arredondado para o conteúdo */
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    /* Ajuste o max-width para um visual mais compacto e elegante */
+    max-width: 450px; 
+    width: 90%;
+    padding: 0; /* Remove padding do content para controle total */
+    animation: fadeIn 0.3s ease-out; /* Animação de entrada */
+    display: flex;
+    flex-direction: column;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 2. Header do Modal (Visual Agradável) */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* Um fundo sutil para destacar o título */
+    background-color: #f8f9fa; 
+    padding: 20px 25px;
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 15px 15px 0 0;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    color: #131720; /* Cor da sua marca para destaque */
+    font-weight: 600;
+    margin: 0;
+}
+
+/* Botão de Fechar */
+.close-button {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: #adb5bd;
+    cursor: pointer;
+    padding: 5px;
+    line-height: 1;
+    transition: color 0.2s, transform 0.2s;
+}
+
+.close-button:hover {
+    color: #dc3545; /* Um vermelho suave para "fechar" */
+    transform: rotate(90deg);
+}
+
+/* 3. Estilização do Formulário */
+#profileForm {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: #495057;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa; /* Levemente cinza para contraste */
+}
+
+.form-group input:focus {
+    border-color: #3168ff; /* Cor primária no foco */
+    box-shadow: 0 0 0 0.2rem rgba(49, 104, 255, 0.25);
+    background-color: #ffffff; /* Fundo branco no foco */
+    outline: none;
+}
+
+.form-group input::placeholder {
+    color: #adb5bd;
+    font-style: italic;
+}
+
+/* 4. Botão de Ação (Salvar) */
+.save-btn {
+    background-color: #3168ff;
+    color: #ffffff;
+    border: none;
+    padding: 14px 25px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 15px;
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    letter-spacing: 0.5px;
+}
+
+.save-btn:hover {
+    background-color: #2a5ddb; /* Um tom mais escuro no hover */
+    box-shadow: 0 4px 10px rgba(49, 104, 255, 0.4);
+}
+
+.save-btn:active {
+    transform: scale(0.98);
 }
