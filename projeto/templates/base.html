@@ -66,6 +66,18 @@
                         <li><a href="#" id="openDoadorModal">Doador</a></li>
                     </ul>
                 </li>
+                <li class="side-item has-submenu">
+                    <a href="#" class="submenu-toggle">
+                        <i class='bx  bxs-handshake' style='color:#050404; font-size: 22px;'></i> 
+                        <span class="item-description">Campanhas</span>
+                        <i class="fa-solid fa-chevron-down arrow"></i>
+                    </a>
+
+                    <ul class="submenu">
+                        <li><a href="{{ url_for('listar_campanhas_ativas') }}">Campanhas Ativas</a></li>
+                        <li><a href="{{ url_for('listar_campanhas_concluidas') }}">Campanhas Concluídas</a></li>
+                    </ul>
+                </li>
 
                 
 
@@ -79,6 +91,7 @@
                         <li><a href="{{ url_for('historico_doacoes') }}">Histórico de Doações</a></li>
                     </ul>
                 </li>
+                
             </ul>
     
             <button id="open_btn">
@@ -116,7 +129,7 @@
             searchInput.addEventListener("keyup", function (e) {
                 if (e.key === "Enter") {
                     const termo = searchInput.value.trim();
-                    window.location.href = `/campanhas?search=${encodeURIComponent(termo)}`;
+                    window.location.href = /campanhas?search=${encodeURIComponent(termo)};
                 }
             });
         }

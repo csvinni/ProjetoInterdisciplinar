@@ -154,3 +154,66 @@ def editar_campanha_via_post(
     
     # Retorna JSON para ser processado pelo JavaScript
     return {"message": "Campanha atualizada com sucesso!", "campanha": campanha}
+
+
+router = APIRouter(prefix="/campanhas", tags=["Campanhas"])
+templates = Jinja2Templates(directory="templates")
+
+
+# 🔹 1 — Listar campanhas ativas
+@router.get("/ativas", response_class=HTMLResponse, name="listar_campanhas_ativas")
+def listar_campanhas_ativas(request: Request, session: Session = Depends(get_session)):
+    campanhas = session.exec(
+        select(Campanha).where(Campanha.status.ilike("ativa"))
+    ).all()
+
+    return templates.TemplateResponse(
+        "card_campanha.html",
+        {"request": request, "campanhas": campanhas}
+    )
+
+
+# 🔹 2 — Listar campanhas concluídas
+@router.get("/concluidas", response_class=HTMLResponse, name="listar_campanhas_concluidas")
+def listar_campanhas_concluidas(request: Request, session: Session = Depends(get_session)):
+    campanhas = session.exec(
+        select(Campanha).where(Campanha.status.ilike("concluida"))
+    ).all()
+
+    return templates.TemplateResponse(
+        "card_campanha.html",
+        {"request": request, "campanhas": campanhas}
+    )
+
+
+# 🔹 3 — Listar todas (página principal)
+@router.get("/", response_class=HTMLResponse)
+def listar_campanhas(
+    request: Request, 
+    search: str | None = None,
+    session: Session = Depends(get_session)
+):
+    query = select(Campanha)
+
+    if search:
+        search_term = f"%{search}%"
+        query = query.where(
+            (Campanha.titulo.ilike(search_term)) |
+            (Campanha.descricao.ilike(search_term))
+        )
+
+    campanhas = session.exec(query).all()
+
+    return templates.TemplateResponse(
+        "card_campanha.html",
+        {"request": request, "campanhas": campanhas, "search": search}
+    )
+
+
+# ❗️ AGORA SIM — rota dinâmica por último
+@router.get("/{campanha_id}", response_model=Campanha)
+def obter_campanha(campanha_id: int, session: Session = Depends(get_session)):
+    campanha = session.get(Campanha, campanha_id)
+    if not campanha:
+        raise HTTPException(status_code=404, detail="Campanha não encontrada")
+    return campanha

@@ -286,23 +286,17 @@ body {
 
 /* Ajuste do main para o header e a sidebar */
 main {
-    /* Padding superior para compensar o header fixo de 70px */
-    padding: 90px 20px 20px 20px; 
-    
-    /* Afasta o MAIN da sidebar */
-    margin-left: 82px; 
-    
-    /* Permite que o MAIN role (Removido o position: fixed incorreto) */
-    position: static; 
-    z-index: 0;
+    padding: 100px 30px 30px 30px; 
+    /* Remove a margem lateral */
+    margin-left: 0;
+
+    /* Garante que o conteúdo não vá para baixo da sidebar */
+    padding-left: 110px;  /* Sidebar = 82px + 20px extra */
     width: 100%;
-    /* Removido o padding-left: calc(82px + 20px) duplicado */
-    transition: margin-left 0.5s;
 }
 
 #sidebar.open-sidebar ~ main {
-    margin-left: 15%; /* Porcentagem definida para a sidebar aberta */
-    padding-left: 20px; 
+    padding-left: calc(15% + 20px);
 }
 
 .modal-overlay {
@@ -376,23 +370,6 @@ main {
     color: #131720; /* Cor da sua marca para destaque */
     font-weight: 600;
     margin: 0;
-}
-
-/* Botão de Fechar */
-.close-button {
-    background: transparent;
-    border: none;
-    font-size: 1.5rem;
-    color: #adb5bd;
-    cursor: pointer;
-    padding: 5px;
-    line-height: 1;
-    transition: color 0.2s, transform 0.2s;
-}
-
-.close-button:hover {
-    color: #dc3545; /* Um vermelho suave para "fechar" */
-    transform: rotate(90deg);
 }
 
 /* 3. Estilização do Formulário */
