@@ -5,7 +5,6 @@
 {% block head %}
     <link rel="stylesheet" href="{{ url_for('static', path='/card_campanha.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', path='/cadastro_campanha.css') }}">
-
 {% endblock %}
 
 {% block content %}
@@ -62,28 +61,33 @@
                             Excluir
                         </button>
                     </form>
+
                     <button 
-                            class="btn btn-editar"
-                            onclick="openEditModal(
-                                {{ campanha.id }}, 
-                                '{{ campanha.titulo }}', 
-                                '{{ campanha.descricao }}', 
-                                {{ campanha.meta_financeira }}, 
-                                {{ campanha.meta_itens }}, 
-                                '{{ campanha.data_inicio.strftime('%Y-%m-%d') if campanha.data_inicio else '' }}', 
-                                '{{ campanha.data_fim.strftime('%Y-%m-%d') if campanha.data_fim else '' }}', 
-                                '{{ campanha.status }}'
-                            )">
+                        class="btn btn-editar"
+                        onclick="openEditModal(
+                            {{ campanha.id }}, 
+                            '{{ campanha.titulo }}', 
+                            '{{ campanha.descricao }}', 
+                            {{ campanha.meta_financeira }}, 
+                            {{ campanha.meta_itens }}, 
+                            '{{ campanha.data_inicio.strftime('%Y-%m-%d') if campanha.data_inicio else '' }}', 
+                            '{{ campanha.data_fim.strftime('%Y-%m-%d') if campanha.data_fim else '' }}', 
+                            '{{ campanha.status }}'
+                        )">
                         Editar
                     </button>
-                    <button class="btn btn-visualizar">Visualizar doações</button>
+
+                    <!-- 🔹 Botão para abrir o modal de histórico -->
+                    <button class="btn btn-visualizar" data-id="{{ campanha.id }}">
+                        Visualizar doações
+                    </button>
+
                 </div>
             </div>
         {% endfor %}
     </div>
 
-
-
+    <!-- Modal de cadastro campanha -->
     <div id="cadastroCampanhaModal" class="modal_overlay hidden">
         <div class="modal_container">
             <div class="header">
@@ -148,6 +152,24 @@
             </form>
         </div>
     </div>
-    <script src="{{ url_for('static', path='/javaScript/modal_campanha.js') }}"></script>
+    <!-- Modal de Histórico de Doações -->
+ <div id="historicoModal" class="modal_overlay hidden">
+    <div class="modal_container">
+        <div class="header">
+            <h2>Histórico de Doações</h2>
+            <button id="closeHistorico" class="close_button">&times;</button>
+        </div>
+
+        <div id="historicoContent" class="historico-content">
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Scripts -->
+<script src="{{ url_for('static', path='/javascript/modal_campanha.js') }}"></script>
+<script src="{{ url_for('static', path='/javascript/historico_modal.js') }}"></script>
+
 
 {% endblock %}

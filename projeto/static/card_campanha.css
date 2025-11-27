@@ -162,6 +162,10 @@
 .btn-excluir {
     background: #ff6b6b;
     color: #fff;
+    height: 60px;
+}
+.btn btn-excluir{
+     height: 60px;
 }
 .btn-excluir:hover {
     background: #e45858;
@@ -183,4 +187,8 @@
 }
 .btn-visualizar:hover {
     background: #d9a23d;
+}
+
+.hidden {
+    display: none !important;
 }

@@ -166,3 +166,30 @@ def historico_doacoes(
             "doadores": doadores,
         },
     )
+
+@router.get("/campanha/{campanha_id}/modal", response_class=HTMLResponse)
+def historico_campanha_modal(
+    campanha_id: int,
+    request: Request,
+    session: Session = Depends(get_session),
+    
+):
+
+    campanha = session.get(Campanha, campanha_id)
+
+    if not campanha or campanha.admin_id != user["id"]:
+        raise HTTPException(status_code=404, detail="Campanha não encontrada")
+
+    doacoes = session.exec(
+        select(Doacao).where(Doacao.campanha_id == campanha_id)
+    ).all()
+
+    return templates.TemplateResponse(
+        "partials/historico_modal.html",
+        {
+            "request": request,
+            "doacoes": doacoes,
+            "nome_campanha": campanha.nome
+        }
+    )
+
