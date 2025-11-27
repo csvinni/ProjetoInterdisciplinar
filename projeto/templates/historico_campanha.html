@@ -1,65 +1,45 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Doações da Campanha</title>
-    <link rel="stylesheet" href="historico_campanha.css">
-</head>
-<body>
-    <div class="historico-wrapper">
-        <section class="historico-section">
-            <h2>Doações da Campanha: {{ nome_campanha or 'Nome da Campanha' }}</h2>
-            <div class="table-container">
-                <table>
+<div class="historico-modal-inner">
+    <div class="historico-modal-header">
+        <h3>Doações — {{ nome_campanha }}</h3>
+        <button class="historico-close-btn" aria-label="Fechar">&times;</button>
+    </div>
+
+    <div class="historico-modal-body">
+        {% if doacoes_campanha|length == 0 %}
+            <div class="empty-doacoes">Não há doações registradas para esta campanha.</div>
+        {% else %}
+            <div class="table-responsive">
+                <table class="historico-table">
                     <thead>
                         <tr>
-                            <th>Nome Doador</th>
-                            <th>Data doação</th>
-                            <th>Tipo doação</th>
-                            <th>Item Doado</th>
+                            <th>Doador</th>
+                            <th>Data</th>
+                            <th>Tipo</th>
+                            <th>Item</th>
                             <th>Valor</th>
-                            <th>Quantidade de itens</th>
+                            <th>Qtd</th>
                             <th>Descrição</th>
                         </tr>
                     </thead>
                     <tbody>
                         {% for doacao in doacoes_campanha %}
                         <tr>
-                            <td>{{ doacao.nome_doador }}</td>
-                            <td>{{ doacao.data_doacao }}</td>
+                            <td>{{ doacao.nome_doador if doacao.nome_doador is defined else '-' }}</td>
+                            <td>{{ doacao.data_doacao.strftime('%d/%m/%Y') if doacao.data_doacao else '-' }}</td>
                             <td>{{ doacao.tipo_doacao }}</td>
-                            <td>{{ doacao.nome_item or '-' }}</td> 
-                            <td>{{ doacao.valor }}</td>
-                            <td>{{ doacao.quantidade_itens }}</td>
-                            <td>{{ doacao.descricao }}</td>
-                        </tr>
-                        {% else %}
-                        <tr>
-                            <td colspan="7" style="text-align: center;">Não há doações registradas para esta campanha.</td>
+                            <td>{{ doacao.tipo_item or '-' }}</td>
+                            <td>{% if doacao.valor %}R$ {{ '%.2f'|format(doacao.valor) }}{% else %}-{% endif %}</td>
+                            <td>{{ doacao.quantidade or '-' }}</td>
+                            <td>{{ doacao.descricao or '-' }}</td>
                         </tr>
                         {% endfor %}
-
-                        <tr>
-                            <td>João Silva</td>
-                            <td>01/11/2025</td>
-                            <td>valor</td>
-                            <td>-</td> <td>R$ 50,00</td>
-                            <td>-</td>
-                            <td>Doação em dinheiro.</td>
-                        </tr>
-                        <tr>
-                            <td>Maria Souza</td>
-                            <td>02/11/2025</td>
-                            <td>itens</td>
-                            <td>Roupas</td> <td>-</td>
-                            <td>5</td>
-                            <td>5 cobertores novos.</td>
-                        </tr>
                     </tbody>
                 </table>
             </div>
-        </section>
+        {% endif %}
     </div>
-</body>
-</html>
+
+    <div class="historico-modal-footer">
+        <button class="btn fechar-historico">Fechar</button>
+    </div>
+</div>

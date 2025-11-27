@@ -1,80 +1,258 @@
-/* Container principal que dará o fundo branco à tabela */
+/* =============================
+   HISTÓRICO DE CAMPANHAS – ESTILO MODERNO
+   ============================= */
+
+/* Fonte geral */
 body {
-    font-family: sans-serif;
-}
-
-.historico-wrapper {
-    background-color: white;
-    padding: 30px;
-    margin: 40px auto;
-    /* 🚀 AUMENTANDO A LARGURA MÁXIMA PARA ACOMODAR 7 COLUNAS */
-    max-width: 1200px; 
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-/* --- Estilização da seção de Histórico e Tabela --- */
-.historico-section {
+    font-family: "Poppins", sans-serif;
+    background: #f5f6fa;
+    margin: 0;
     padding: 0;
 }
 
-/* Estilização do título H2 com as barrinhas laterais */
-.historico-section h2 {
-    color: #e67e22;
-    font-size: 24px;
-    margin-bottom: 20px;
-    
-    /* Configura o h2 como um contêiner Flexbox */
-    display: flex;
-    align-items: center; /* Alinha os itens verticalmente */
-    justify-content: center; /* Centraliza o texto "Histórico" */
-    gap: 15px; /* Espaçamento entre o título e as barras */
+/* Container principal */
+.historico-container {
+    max-width: 1000px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
-/* Cria a barrinha esquerda usando um pseudoelemento */
-.historico-section h2::before {
-    content: '';
-    height: 24px; /* Altura da barrinha, igual à altura do texto */
-    width: 5px; /* Largura da barrinha */
-    background-color: #e67e22;
-}
-
-/* Cria a barrinha direita usando um pseudoelemento */
-.historico-section h2::after {
-    content: '';
-    height: 24px; /* Altura da barrinha */
-    width: 5px; /* Largura da barrinha */
-    background-color: #e67e22;
-}
-
-/* --- Estilização da tabela --- */
-.table-container {
-    background-color: white;
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-table {
-    width: 100%;
-    /* 💡 Adicionando table-layout fixo para melhor controle da largura das colunas */
-    table-layout: fixed; 
-    border-collapse: collapse;
-}
-
-table th, table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-    /* 💡 Adicionando esta linha para que textos longos não quebrem a coluna */
-    word-wrap: break-word; 
-}
-
-table th {
-    background-color: #f2f2f2;
-    font-weight: bold;
+/* Título */
+.historico-container h2 {
+    font-size: 28px;
+    font-weight: 600;
     color: #333;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-table tr:last-child td {
-    border-bottom: none;
+/* Estilo da tabela */
+.historico-table {
+    width: 100%;
+    border-collapse: collapse;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.historico-table thead {
+    background: #4d6aff;    
+    color: white;
+}
+
+.historico-table thead th {
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+}
+
+.historico-table tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+    transition: 0.2s;
+}
+
+.historico-table tbody tr:hover {
+    background: #f8f9ff;
+}
+
+.historico-table td {
+    padding: 12px 14px;
+    color: #555;
+    font-size: 14px;
+}
+
+/* Status tags */
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    display: inline-block;
+}
+
+.status.ativo {
+    background: #e3f8e6;
+    color: #2b9d3d;
+}
+
+.status.inativo {
+    background: #ffeceb;
+    color: #d63031;
+}
+
+.status.finalizado {
+    background: #eaf1ff;
+    color: #3b5bd6;
+}
+
+/* Botão de voltar */
+.btn-voltar {
+    margin-top: 20px;
+    display: inline-block;
+    background-color: #4d6aff;
+    padding: 10px 20px;
+    color: #fff;
+    border-radius: 10px;
+    text-decoration: none;
+    font-size: 15px;
+    transition: 0.3s;
+}
+
+.btn-voltar:hover {
+    background-color: #3c53d4;
+}
+
+/* Responsividade para celular */
+@media (max-width: 768px) {
+    .historico-container {
+        margin: 20px;
+        padding: 15px;
+    }
+
+    .historico-table thead {
+        display: none;
+    }
+
+    .historico-table tr {
+        display: block;
+        margin-bottom: 12px;
+        background: #fff;
+        border-radius: 10px;
+        padding: 14px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    .historico-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px 0;
+        font-size: 14px;
+        border-bottom: 1px solid #f2f2f2;
+    }
+
+    .historico-table td:last-child {
+        border-bottom: none;
+    }
+
+    .historico-table td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: #333;
+    }
+}
+
+/* Modal overlay */
+.historico-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 20, 35, 0.55);
+    display: none; /* toggled by JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 24px;
+}
+
+/* Modal inner box */
+.historico-modal-inner {
+    width: 100%;
+    max-width: 980px;
+    max-height: 85vh;
+    overflow: auto;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(2,6,23,0.3);
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.historico-modal-header {
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid #eef0f6;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+.historico-modal-header h3 {
+    margin:0;
+    font-size: 18px;
+    color: #1f2937;
+}
+.historico-close-btn {
+    background: transparent;
+    border: none;
+    font-size: 26px;
+    line-height:1;
+    cursor: pointer;
+    color: #666;
+}
+
+/* Body */
+.historico-modal-body { padding: 6px 2px 12px 2px; }
+
+.table-responsive { overflow-x: auto; }
+.historico-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+.historico-table thead th {
+    text-align: left;
+    padding: 10px 12px;
+    background: #4d6aff;
+    color: #fff;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+.historico-table tbody tr:nth-child(even){ background: #fbfbff; }
+.historico-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid #f1f3f8;
+    color: #333;
+    vertical-align: middle;
+}
+
+/* Empty message inside modal */
+.empty-doacoes {
+    text-align: center;
+    padding: 30px 12px;
+    color: #666;
+    font-weight: 500;
+}
+
+/* Footer */
+.historico-modal-footer { display:flex; justify-content:flex-end; margin-top: 12px; }
+.btn.fechar-historico {
+    background:#4d6aff;
+    color:#fff;
+    border:none;
+    padding:8px 14px;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+/* Loader */
+.historico-loader {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding: 30px 0;
+    color:#666;
+}
+
+/* responsivo */
+@media (max-width: 640px) {
+    .historico-modal-inner { padding:12px; }
+    .historico-modal-header h3 { font-size: 16px; }
+    .historico-table thead th { padding: 10px; font-size: 13px; }
+    .historico-table td { padding: 8px 10px; font-size: 13px; }
 }
