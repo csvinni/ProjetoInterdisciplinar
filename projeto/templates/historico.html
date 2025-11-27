@@ -3,7 +3,7 @@
 {% block title %}GDCB - Histórico de Doações{% endblock %}
 
 {% block head %}
-    <link rel="stylesheet" href="{{ url_for('static', path='historico.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', path='doacao.css') }}">
 {% endblock %}
 
 {% block content %}
@@ -91,4 +91,88 @@
             </div>
         </section>
     </div>
+
+    <div class="graficos-duplos">
+
+    <!-- Gráfico 1 - Tipo de Doação -->
+    <div class="grafico-wrapper">
+        <h3>Distribuição por Tipo de Doação</h3>
+        <div class="grafico-container">
+            <canvas id="graficoTipo"></canvas>
+        </div>
+    </div>
+
+    <!-- Gráfico 2 - Campanhas com Mais Doações -->
+    <div class="grafico-wrapper">
+        <h3>Campanhas com Mais Doações</h3>
+        <div class="grafico-container">
+            <canvas id="graficoCampanhas"></canvas>
+        </div>
+    </div>
+
+</div>
+
+    
+
+    <!-- ApexCharts -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const doacoes = {{ doacoes | tojson }};
+
+    // ---------- GRÁFICO DE TIPOS ----------
+    let qtdItens = 0;
+    let qtdDinheiro = 0;
+
+    doacoes.forEach(d => {
+        if (d.tipo === "itens") qtdItens++;
+        if (d.tipo === "dinheiro") qtdDinheiro++;
+    });
+
+    new Chart(document.getElementById("graficoTipo"), {
+        type: "pie",
+        data: {
+            labels: ["Itens", "Dinheiro"],
+            datasets: [{
+                data: [qtdItens, qtdDinheiro],
+                backgroundColor: ["#4a7df2", "#2ecc71"]
+            }]
+        },
+        options: { responsive: true }
+    });
+
+
+    // ---------- GRÁFICO DE CAMPANHAS ----------
+
+    // Agrupa doações por campanha
+    const contagemCampanhas = {};
+    doacoes.forEach(d => {
+        if (!contagemCampanhas[d.campanha]) contagemCampanhas[d.campanha] = 0;
+        contagemCampanhas[d.campanha]++;
+    });
+
+    const labelsCampanhas = Object.keys(contagemCampanhas);
+    const valoresCampanhas = Object.values(contagemCampanhas);
+
+    new Chart(document.getElementById("graficoCampanhas"), {
+        type: "bar",
+        data: {
+            labels: labelsCampanhas,
+            datasets: [{
+                label: "Número de Doações",
+                data: valoresCampanhas,
+                backgroundColor: "#1c52a8"
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+
+</script>
+
+
 {% endblock %}
