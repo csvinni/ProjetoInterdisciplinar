@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, Form, Request
 from sqlmodel import Session, select
-from models import Campanha
+from models import Campanha, Doacao, Doador
 from database import get_session
 from datetime import date
 from fastapi.templating import Jinja2Templates
@@ -180,3 +180,68 @@ def obter_campanha(
         raise HTTPException(status_code=404, detail="Campanha não encontrada")
 
     return campanha
+
+# -------------------------------------------------------------------
+# 🔹 VISUALIZAR DOAÇÕES DE UMA CAMPANHA
+# -------------------------------------------------------------------
+
+@router.get("/{campanha_id}/doacoes", response_class=HTMLResponse)
+def visualizar_doacoes_campanha(
+    campanha_id: int,
+    request: Request,
+    doador_id: str | None = None,     # <--- agora é string
+    tipo: str | None = None,
+    data: str | None = None,
+    session: Session = Depends(get_session),
+    user: dict = Depends(get_current_user)
+):
+    campanha = session.get(Campanha, campanha_id)
+    if not campanha or campanha.admin_id != user["id"]:
+        raise HTTPException(status_code=404, detail="Campanha não encontrada")
+
+    query = (
+        select(Doacao, Doador)
+        .join(Doador, Doacao.id_doador == Doador.id)
+        .where(Doacao.id_campanha == campanha_id)
+    )
+
+    # ----- FILTROS -----
+
+    # DOADOR
+    if doador_id:
+        try:
+            doador_id_int = int(doador_id)
+            query = query.where(Doacao.id_doador == doador_id_int)
+        except ValueError:
+            pass
+
+    # TIPO
+    if tipo:
+        query = query.where(Doacao.tipo_doacao == tipo)
+
+    # DATA
+    if data:
+        try:
+            dt = datetime.strptime(data, "%Y-%m-%d").date()
+            query = query.where(Doacao.data_doacao == dt)
+        except ValueError:
+            pass
+
+    rows = session.exec(query).all()
+
+    doacoes = []
+    for doacao, doador in rows:
+        doacao.doador = doador
+        doacoes.append(doacao)
+
+    doadores = session.exec(select(Doador)).all()
+
+    return templates.TemplateResponse(
+        "doacoes_campanha.html",
+        {
+            "request": request,
+            "campanha": campanha,
+            "doacoes": doacoes,
+            "doadores": doadores
+        }
+    )

@@ -1,0 +1,151 @@
+.table-wrapper {
+    width: 85%;                 /* largura igual ao modelo */
+    max-width: 1100px;          /* evita ficar larga demais */
+    margin: 20px auto;          /* centraliza */
+    background: #fff;
+    border-radius: 16px;
+    padding: 30px 40px;         /* espaço interno igual ao print */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+/* TÍTULO igual ao print */
+.table-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #0D3B66;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.table-title::before {
+    content: "";
+    width: 6px;
+    height: 28px;
+    background: #0D3B66;
+    border-radius: 4px;
+}
+
+/* TABELA */
+
+.table-custom {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+/* Cabeçalho azul igual ao print */
+.table-custom thead tr {
+    background-color: #3F82F8;
+    color: white;
+    text-align: left;
+}
+
+.table-custom thead th {
+    padding: 12px 10px;
+    font-weight: bold;
+}
+
+/* Linhas alternadas */
+.table-custom tbody tr:nth-child(even) {
+    background-color: #F7F9FC;
+}
+
+.table-custom tbody td {
+    padding: 10px;
+    color: #444;
+    border-bottom: 1px solid #eee;
+}
+
+.table-custom tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* ----- CONTAINER DOS FILTROS ----- */
+.filtros-card {
+    background: #ffffff;
+    padding: 22px;
+    border-radius: 14px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    margin-bottom: 35px;
+    width: 100%;
+    max-width: 950px; /* deixa alinhado com a tabela */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ----- GRID DOS FILTROS ----- */
+.filtros-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+}
+
+/* ----- LABELS ----- */
+.filtro-item label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* ----- SELECTS E INPUTS ----- */
+.filtros-card select,
+.filtros-card input[type="date"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d3d3d3;
+    border-radius: 8px;
+    background: #f8f9fa;
+    font-size: 14px;
+    transition: 0.2s ease-in-out;
+}
+
+/* Hover e foco */
+.filtros-card select:hover,
+.filtros-card input[type="date"]:hover {
+    border-color: #999;
+}
+
+.filtros-card select:focus,
+.filtros-card input[type="date"]:focus {
+    outline: none;
+    border-color: #0057b3;
+    background: #fff;
+}
+
+/* ----- BOTÃO FILTRAR ----- */
+.btn-filtrar {
+    margin-top: 24px;
+    width: 100%;
+    background: #e53935;
+    color: white;
+    font-weight: 600;
+    border: none;
+    padding: 11px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    font-size: 15px;
+}
+
+.btn-filtrar:hover {
+    background: #c62828;
+}
+
+/* ----- RESPONSIVO ----- */
+@media (max-width: 900px) {
+    .filtros-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 550px) {
+    .filtros-grid {
+        grid-template-columns: 1fr;
+    }
+}

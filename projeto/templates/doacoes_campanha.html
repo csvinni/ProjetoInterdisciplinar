@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block title %}Doações da Campanha{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', path='doacao_campanha.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="page-wrapper">
+
+    <!-- CARD DE FILTROS -->
+    <form method="get" class="filtros-card">
+        <div class="filtros-grid">
+
+            <div class="filtro-item">
+                <label>Doador</label>
+                <select name="doador_id">
+                    <option value="">Todos</option>
+                    {% for d in doadores %}
+                        <option value="{{ d.id }}"
+                            {% if request.query_params.get('doador_id') == (d.id|string) %}selected{% endif %}>
+                            {{ d.nome }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="filtro-item">
+                <label>Tipo de doação</label>
+                <select name="tipo">
+                    <option value="">Todos</option>
+                    <option value="dinheiro" {% if request.query_params.get('tipo') == 'dinheiro' %}selected{% endif %}>Dinheiro</option>
+                    <option value="itens" {% if request.query_params.get('tipo') == 'itens' %}selected{% endif %}>Itens</option>
+                </select>
+            </div>
+
+            <div class="filtro-item">
+                <label>Data</label>
+                <input type="date" name="data" value="{{ request.query_params.get('data', '') }}">
+            </div>
+
+            <div class="filtro-btn-wrapper">
+                <button type="submit" class="btn-filtrar">Filtrar</button>
+            </div>
+
+        </div>
+    </form>
+
+    <!-- CARD DA TABELA -->
+    <div class="table-wrapper">
+
+        <h2 class="table-title">
+            Doações da campanha: {{ campanha.titulo }}
+        </h2>
+    
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Doador</th>
+                    <th>Data</th>
+                    <th>Tipo</th>
+                    <th>Valor</th>
+                    <th>Qtd</th>
+                </tr>
+            </thead>
+    
+            <tbody>
+            {% if doacoes %}
+                {% for d in doacoes %}
+                    <tr>
+                        <td>{{ d.doador.nome }}</td>
+                        <td>{{ d.data_doacao.strftime('%d/%m/%Y') }}</td>
+                        <td>{{ d.tipo_doacao }}</td>
+                        <td>{{ d.valor if d.valor else '-' }}</td>
+                        <td>{{ d.quantidade if d.quantidade else '-' }}</td>
+                    </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="6" class="empty-text">Nenhuma doação encontrada.</td>
+                </tr>
+            {% endif %}
+            </tbody>
+        </table>
+    
+    </div>    
+
+</div>
+
+{% endblock %}
