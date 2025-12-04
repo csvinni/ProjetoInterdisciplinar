@@ -97,12 +97,13 @@
         </div>
 
         <div id="logout">
-            <a href="{{ url_for('logout') }}">
-                <button id="logout_btn">
+           <form action="{{ url_for('logout') }}" method="get">
+                <button id="logout_btn" type="submit">
                     <i class="fa-solid fa-right-from-bracket"></i>
                     <span class="item-description">Logout</span>
                 </button>
-            </a>
+            </form>
+
         </div>
     </nav>
 

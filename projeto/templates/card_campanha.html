@@ -78,9 +78,11 @@
                     </button>
 
                     <!-- 🔹 Botão para abrir o modal de histórico -->
-                    <a class="btn btn-visualizar" href="/campanhas/{{ campanha.id }}/doacoes">
+                    <button class="btn btn-visualizar"
+                        onclick="window.location.href='/campanhas/{{ campanha.id }}/doacoes'">
                         Visualizar doações
-                    </a>
+                    </button>
+
                     
 
                 </div>
@@ -170,7 +172,6 @@
 
     <!-- Scripts -->
 <script src="{{ url_for('static', path='/javascript/modal_campanha.js') }}"></script>
-<script src="{{ url_for('static', path='/javascript/historico_modal.js') }}"></script>
 
 
 {% endblock %}

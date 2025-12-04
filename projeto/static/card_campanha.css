@@ -189,6 +189,10 @@
     background: #d9a23d;
 }
 
-.hidden {
-    display: none !important;
+.modal_overlay.hidden {
+    display: none;
+}
+
+.modal_overlay.visible {
+    display: flex; /* ou block, dependendo do seu design */
 }

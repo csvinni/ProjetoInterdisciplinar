@@ -57,6 +57,8 @@ header.scrolled {
 .header-actions {
     display: flex;
     align-items: center;
+    width: 350px;
+    gap:10px;
 }
 
 .register-btn {

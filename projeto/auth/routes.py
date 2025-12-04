@@ -65,7 +65,7 @@ def cadastro(
 @router.get("/logout")
 def logout(request: Request):
     request.session.clear()  # 🧹 Limpa os dados da sessão
-    return RedirectResponse(url="/auth/login", status_code=HTTP_302_FOUND)
+    return RedirectResponse(url="/", status_code=HTTP_302_FOUND)
 
 @router.get("/perfil", response_class=HTMLResponse)
 def perfil_page(request: Request, user=Depends(get_current_user)):

@@ -7,9 +7,10 @@ from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse, RedirectResponse
 from auth.routes import get_current_user
 
-router = APIRouter(prefix="/campanhas", tags=["Campanhas"])
+
 templates = Jinja2Templates(directory="templates")
 
+router = APIRouter( prefix="/campanhas", tags=["Campanhas"], dependencies=[Depends(get_current_user)])
 
 # -------------------------------------------------------------------
 # 🔹 CADASTRAR CAMPANHA

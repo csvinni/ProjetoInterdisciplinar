@@ -13,14 +13,20 @@
              <img src="../static/assets/logo.png" alt="Logo" class="logo-img" />
              <span class="logo-text">Gerenciador de Doações e Campanhas Beneficente</span>
          </div>
-         <div class="header-actions">
-             <a href="{{ url_for('cadastro') }}" class="register-btn">
-                <h3>Cadastre agora a sua ONG</h3>
-             </a>
-                 <div class="user-icon">
-                     <i class="fa-solid fa-user"></i>
-                 </div>
-         </div>
+        <div class="header-actions">
+            <a href="{{ url_for('cadastro') }}">
+                <button class="register-btn">
+                    Cadastre agora a sua ONG
+                </button>
+            </a>
+
+            <a href="{{ url_for('login') }}">
+                <button class="register-btn">
+                    Login
+                </button>
+            </a>
+        </div>
+
          </header>
          <section class="section1">
              <div class="content-text">
