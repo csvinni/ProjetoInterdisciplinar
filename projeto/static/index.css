@@ -110,10 +110,10 @@ header.scrolled {
 .section2 {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Centraliza verticalmente o conteúdo (textos e dev-section) */
+    align-items: center; 
     width: 100%;
-    height: 100vh;
-    align-items: center;
+    min-height: 100vh; /* Ajuste sugerido */
     flex-grow: 1;
     color: black;
     background-color: var(--font-color-light);
@@ -121,6 +121,7 @@ header.scrolled {
     text-align: center;
     position: relative;
     z-index: 2;
+    gap: 50px; /* Adicione um espaçamento entre os elementos internos */
 }
   
 .headline {
@@ -159,4 +160,86 @@ header.scrolled {
     align-items: center;
     margin-top: 40px;
     opacity: 0.8;
+}
+
+.dev-section {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.dev-section h2 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+.dev-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: nowrap; /* impede que os cards quebrem para a próxima linha */
+    overflow-x: auto;  /* permite rolagem horizontal se não couber na tela */
+    padding: 10px 0;
+    scroll-behavior: smooth;
+}
+
+.dev-card {
+    flex: 0 0 auto; /* impede que o card encolha ou cresça */
+}
+
+
+.dev-card {
+    background: #fff;
+    width: 220px;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.dev-card:hover {
+    transform: translateY(-5px);
+}
+
+.dev-card img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px;
+    margin-bottom: 15px;
+}
+
+.dev-card h3 {
+    margin: 10px 0 5px;
+}
+
+.dev-card p {
+    margin: 0;
+    color: #555;
+}
+.dev-card a {
+    /* 1. Transforma o link em um bloco para aceitar largura e margens automáticas */
+    display: block; 
+    
+    /* 2. Define a largura base do seu conteúdo (ícone + Instagram) */
+    width: fit-content; /* Ocupa apenas a largura necessária do conteúdo */
+    
+    /* 3. CENTRALIZA O BLOCO HORIZONTALMENTE */
+    margin: 10px auto 0 auto; /* Define margem superior (10px) e centraliza automaticamente (auto) */
+    
+    /* 4. Propriedades de estilo (manter) */
+    color: #d6249f;
+    font-weight: 600;
+    text-decoration: none;
+    
+    /* 5. Alinhamento interno (para o ícone e texto) */
+    text-align: center; 
+    margin-left: 45px;
+}
+.dev-card a:hover {
+    text-decoration: underline;
+}
+.dev-card a i {
+    margin-right: 6px; /* Adiciona um espaço de 6px à direita do ícone */
+    vertical-align: middle; /* Ajuda a alinhar o ícone com o texto */
 }
