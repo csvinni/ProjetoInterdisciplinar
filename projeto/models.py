@@ -18,7 +18,11 @@ class Doador(SQLModel, table=True):
     telefone: str
     data_criacao: date = Field(default_factory=date.today)
 
+    admin_id: int = Field(foreign_key="admin.id")  # 🔥 ADICIONAR ISTO
+
     doacoes: List["Doacao"] = Relationship(back_populates="doador")
+    admin: Optional["Admin"] = Relationship(back_populates="doadores")
+
 
 
 # -----------------------------
@@ -70,6 +74,7 @@ class Admin(SQLModel, table=True):
     senha: str
     ong: str
     data_criacao: date = Field(default_factory=date.today)
+    doadores: List["Doador"] = Relationship(back_populates="admin")
 
     # 🔑 NOVA RELAÇÃO (Back-Populates)
     campanhas: List["Campanha"] = Relationship(back_populates="admin")
@@ -79,6 +84,7 @@ class Admin(SQLModel, table=True):
 
     def check_password(self, password: str) -> bool:
         return check_password_hash(self.senha, password)
+    
     
     
 # -----------------------------

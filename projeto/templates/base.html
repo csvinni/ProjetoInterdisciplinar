@@ -113,14 +113,17 @@
 
     <main>
 
+        <!-- O botão sempre aparece -->
+        {% block content %}{% endblock %}
+
+        <!-- Mensagem quando não houver campanhas -->
         {% if campanhas is defined and campanhas|length == 0 %}
             <div class="empty-message">
                 <i class="fa-solid fa-circle-info"></i>
                 Nenhuma campanha {{ titulo|lower }} encontrada.
             </div>
-        {% else %}
-            {% block content %}{% endblock %}
         {% endif %}
+
 
     </main>
 

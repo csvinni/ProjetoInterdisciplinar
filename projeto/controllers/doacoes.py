@@ -14,8 +14,24 @@ templates = Jinja2Templates(directory="templates")
 # 1️⃣ Formulário de cadastro
 @router.get("/cadastro", response_class=HTMLResponse, name="formulario_doacao")
 def formulario_doacao(request: Request, session: Session = Depends(get_session)):
-    doadores = session.exec(select(Doador)).all()
-    campanhas = session.exec(select(Campanha)).all()
+
+    # Pegando admin logado
+    user = request.session.get("user")
+    if not user:
+        raise HTTPException(status_code=401, detail="Usuário não autenticado")
+
+    admin_id = user["id"]
+
+    # Filtrar doadores da ONG logada
+    doadores = session.exec(
+        select(Doador).where(Doador.admin_id == admin_id)
+    ).all()
+
+    # Filtrar campanhas da ONG logada
+    campanhas = session.exec(
+        select(Campanha).where(Campanha.admin_id == admin_id)
+    ).all()
+
     return templates.TemplateResponse(
         "cadastro_doacoes.html",
         {"request": request, "doadores": doadores, "campanhas": campanhas},
@@ -25,6 +41,7 @@ def formulario_doacao(request: Request, session: Session = Depends(get_session))
 # 2️⃣ Cadastro (POST)
 @router.post("/cadastro")
 def cadastrar_doacao(
+    request: Request,
     id_doador: int = Form(...),
     id_campanha: int = Form(...),
     tipo_doacao: str = Form(...),
@@ -35,6 +52,14 @@ def cadastrar_doacao(
     data_doacao_itens: str = Form(None),
     session: Session = Depends(get_session),
 ):
+
+    # Pegando admin logado
+    user = request.session.get("user")
+    if not user:
+        raise HTTPException(status_code=401, detail="Usuário não autenticado")
+
+    admin_id = user["id"]
+
     # Conversões seguras
     valor = float(valor) if valor else None
     quantidade = int(quantidade) if quantidade else None
@@ -45,17 +70,22 @@ def cadastrar_doacao(
     if not doador_existente or not campanha_existente:
         raise HTTPException(status_code=404, detail="Doador ou campanha não encontrados")
 
+    # 🔒 Verificações de segurança
+    if doador_existente.admin_id != admin_id:
+        raise HTTPException(status_code=403, detail="Este doador não pertence à sua ONG")
+
+    if campanha_existente.admin_id != admin_id:
+        raise HTTPException(status_code=403, detail="Esta campanha não pertence à sua ONG")
+
     if tipo_doacao == "dinheiro":
         data_doacao = (
             date.fromisoformat(data_doacao_dinheiro)
-            if data_doacao_dinheiro
-            else date.today()
+            if data_doacao_dinheiro else date.today()
         )
     else:
         data_doacao = (
             date.fromisoformat(data_doacao_itens)
-            if data_doacao_itens
-            else date.today()
+            if data_doacao_itens else date.today()
         )
 
     nova_doacao = Doacao(
@@ -75,17 +105,17 @@ def cadastrar_doacao(
     return RedirectResponse(url="/dashboard", status_code=303)
 
 
-
 # 3️⃣ Página de sucesso
 @router.get("/sucesso", response_class=HTMLResponse)
 def sucesso(request: Request):
     return templates.TemplateResponse("card_campanha.html", {"request": request})
 
 
-# 4️⃣ Listagem
+# 4️⃣ Listagem API (JSON)
 @router.get("/", response_model=List[Doacao])
 def listar_doacoes(session: Session = Depends(get_session)):
     return session.exec(select(Doacao)).all()
+
 
 # 5️⃣ Página de histórico (HTML)
 @router.get("/historico", response_class=HTMLResponse)
@@ -97,46 +127,53 @@ def historico_doacoes(
     data: str | None = Query(None),
     session: Session = Depends(get_session),
 ):
-    # converter ids para int com segurança
-    campanha_id_int: int | None = None
-    doador_id_int: int | None = None
+    # Usuário logado
+    user = request.session.get("user")
+    if not user:
+        raise HTTPException(status_code=401, detail="Usuário não autenticado")
 
-    try:
-        if campanha_id not in (None, ""):
-            campanha_id_int = int(campanha_id)
-    except ValueError:
-        campanha_id_int = None
+    admin_id = user["id"]
 
-    try:
-        if doador_id not in (None, ""):
-            doador_id_int = int(doador_id)
-    except ValueError:
-        doador_id_int = None
+    # Carregar apenas campanhas desta ONG
+    campanhas_user = session.exec(
+        select(Campanha).where(Campanha.admin_id == admin_id)
+    ).all()
 
-    # Base da query
+    if not campanhas_user:
+        return templates.TemplateResponse(
+            "historico.html",
+            {
+                "request": request,
+                "doacoes": [],
+                "campanhas": [],
+                "doadores": session.exec(select(Doador).where(Doador.admin_id == admin_id)).all(),
+            },
+        )
+
+    campanhas_ids = [c.id for c in campanhas_user]
+
+    # Query base
     query = (
         select(Doacao, Doador, Campanha)
         .join(Doador, Doacao.id_doador == Doador.id)
         .join(Campanha, Doacao.id_campanha == Campanha.id)
+        .where(Doacao.id_campanha.in_(campanhas_ids))
     )
 
-    # Filtros opcionais (usando as versões int convertidas)
-    if campanha_id_int:
-        query = query.where(Doacao.id_campanha == campanha_id_int)
+    # Aplicar filtros opcionais
+    if campanha_id:
+        query = query.where(Doacao.id_campanha == int(campanha_id))
 
-    if doador_id_int:
-        query = query.where(Doacao.id_doador == doador_id_int)
+    if doador_id:
+        query = query.where(Doacao.id_doador == int(doador_id))
 
     if tipo:
         query = query.where(Doacao.tipo_doacao == tipo)
 
     if data:
-        from datetime import date
         try:
-            data_formatada = date.fromisoformat(data)
-            query = query.where(Doacao.data_doacao == data_formatada)
+            query = query.where(Doacao.data_doacao == date.fromisoformat(data))
         except ValueError:
-            # data inválida -> ignora o filtro
             pass
 
     resultados = session.exec(query).all()
@@ -153,35 +190,38 @@ def historico_doacoes(
             "descricao": doacao.tipo_item,
         })
 
-    # Para preencher os selects
-    campanhas = session.exec(select(Campanha)).all()
-    doadores = session.exec(select(Doador)).all()
-
     return templates.TemplateResponse(
         "historico.html",
         {
             "request": request,
             "doacoes": lista_doacoes,
-            "campanhas": campanhas,
-            "doadores": doadores,
+            "campanhas": campanhas_user,
+            "doadores": session.exec(select(Doador).where(Doador.admin_id == admin_id)).all(),
         },
     )
 
+
+# 6️⃣ Modal com histórico por campanha
 @router.get("/campanha/{campanha_id}/modal", response_class=HTMLResponse)
 def historico_campanha_modal(
     campanha_id: int,
     request: Request,
     session: Session = Depends(get_session),
-    
 ):
+
+    user = request.session.get("user")
+    if not user:
+        raise HTTPException(status_code=401, detail="Usuário não autenticado")
+
+    admin_id = user["id"]
 
     campanha = session.get(Campanha, campanha_id)
 
-    if not campanha or campanha.admin_id != user["id"]:
+    if not campanha or campanha.admin_id != admin_id:
         raise HTTPException(status_code=404, detail="Campanha não encontrada")
 
     doacoes = session.exec(
-        select(Doacao).where(Doacao.campanha_id == campanha_id)
+        select(Doacao).where(Doacao.id_campanha == campanha_id)
     ).all()
 
     return templates.TemplateResponse(
@@ -189,7 +229,6 @@ def historico_campanha_modal(
         {
             "request": request,
             "doacoes": doacoes,
-            "nome_campanha": campanha.nome
+            "nome_campanha": campanha.titulo
         }
     )
-

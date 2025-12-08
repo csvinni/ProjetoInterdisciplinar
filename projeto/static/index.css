@@ -94,7 +94,7 @@ header.scrolled {
     flex-direction: column;
     justify-content: flex-end;
     width: 100%;
-    height: 100vh; /* Garante que a seção ocupe 100% da altura da viewport */
+    height: 100svh; /* Garante que a seção ocupe 100% da altura da viewport */
     align-items: center;
     padding: 20px;
     text-align: center;
